@@ -68,29 +68,72 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function postJob(jobData) {
-    // Get current user
-    const user = getCurrentUser();
+async function postJob(jobData) {
+    const db = getFirestore();
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
     
-    // Deduct coins (lock them)
-    user.coins -= jobData.coins;
-    user.lockedCoins = (user.lockedCoins || 0) + jobData.coins;
+    if (!currentUser) {
+        alert('❌ You must be logged in to post a job.');
+        window.location.href = 'login.html';
+        return;
+    }
     
-    // Save updated user
-    localStorage.setItem('workcoin_user', JSON.stringify(user));
-    
-    // In a real app, jobData would be sent to the backend here.
-    
-    // Show success message
-    alert(
-        `✅ Job posted successfully!\n\n` +
-        `Your job "${jobData.title}" is now live.\n` +
-        `${jobData.coins} coins have been locked.\n\n` +
-        `Workers can now browse and apply to your job.`
-    );
-    
-    // Redirect to my jobs
-    window.location.href = 'my-jobs.html';
+    try {
+        // Get current user data
+        const user = getCurrentUser();
+        
+        // Create job document
+        const jobDoc = {
+            title: jobData.title,
+            category: jobData.category,
+            categoryIcon: getCategoryIcon(jobData.category),
+            description: jobData.description,
+            fullDescription: jobData.fullDescription,
+            deliverables: jobData.deliverables,
+            coins: jobData.coins,
+            deadline: jobData.deadline,
+            daysLeft: calculateDaysLeft(jobData.deadline),
+            status: 'open',
+            clientId: currentUser.uid,
+            clientName: user.name,
+            clientEmail: user.email,
+            applications: 0,
+            postedDate: new Date().toISOString().split('T')[0],
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+        
+        // Add job to Firestore
+        const jobRef = await db.collection('jobs').add(jobDoc);
+        
+        // Update user's locked coins
+        const userRef = db.collection('users').doc(currentUser.uid);
+        await userRef.update({
+            coins: firebase.firestore.FieldValue.increment(-jobData.coins),
+            lockedCoins: firebase.firestore.FieldValue.increment(jobData.coins),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        
+        // Update localStorage
+        user.coins -= jobData.coins;
+        user.lockedCoins = (user.lockedCoins || 0) + jobData.coins;
+        saveUserData(user);
+        
+        // Show success message
+        alert(
+            `✅ Job posted successfully!\n\n` +
+            `Your job "${jobData.title}" is now live.\n` +
+            `${jobData.coins} coins have been locked.\n\n` +
+            `Workers can now browse and apply to your job.`
+        );
+        
+        // Redirect to my jobs
+        window.location.href = 'my-jobs.html';
+    } catch (error) {
+        console.error('Error posting job:', error);
+        alert('❌ Failed to post job. Please try again.');
+    }
 }
 
 function calculateDaysLeft(deadline) {

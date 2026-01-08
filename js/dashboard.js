@@ -1,10 +1,27 @@
 // Dashboard Logic
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if user is logged in
-    const isLoggedIn = localStorage.getItem('workcoin_logged_in') === 'true';
-    if (!isLoggedIn) {
+document.addEventListener('DOMContentLoaded', async function() {
+    // Check if user is logged in with Firebase
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+    
+    if (!currentUser && !isLoggedIn()) {
         window.location.href = 'login.html';
         return;
+    }
+    
+    // If Firebase user exists but no localStorage data, fetch from Firestore
+    if (currentUser && !getUserData()) {
+        try {
+            const userData = await getUserProfile(currentUser.uid);
+            if (userData) {
+                saveUserData(userData);
+            } else {
+                window.location.href = 'login.html';
+                return;
+            }
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
     }
     
     // Get current user data
@@ -24,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Setup menu toggle
     setupMenuToggle();
+    
+    // Setup logout button
+    setupLogout();
 });
 
 function updateHeader(user) {
@@ -171,4 +191,17 @@ function setupMenuToggle() {
             }
         });
     }
+}
+
+function setupLogout() {
+    // Find all logout buttons/links
+    const logoutBtns = document.querySelectorAll('[onclick*="logout"]');
+    logoutBtns.forEach(btn => {
+        btn.onclick = async function(e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to logout?')) {
+                await logout();
+            }
+        };
+    });
 }

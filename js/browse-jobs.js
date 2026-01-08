@@ -1,17 +1,52 @@
 // Browse Jobs Logic
-document.addEventListener('DOMContentLoaded', function() {
-    let allJobs = getAllJobs();
-    let filteredJobs = [...allJobs];
+document.addEventListener('DOMContentLoaded', async function() {
+    let allJobs = [];
+    let filteredJobs = [];
     let currentCategory = 'all';
     let currentSort = 'newest';
     
-    // Load jobs
-    displayJobs(filteredJobs);
+    // Load jobs from Firestore
+    await loadJobsFromFirestore();
     
     // Setup event listeners
     setupCategoryFilters();
     setupSortFilter();
     setupSearch();
+    
+    async function loadJobsFromFirestore() {
+        const db = getFirestore();
+        const jobsList = document.getElementById('jobsList');
+        
+        if (jobsList) {
+            jobsList.innerHTML = '<div class="loading">Loading jobs...</div>';
+        }
+        
+        try {
+            const snapshot = await db.collection('jobs')
+                .where('status', '==', 'open')
+                .orderBy('createdAt', 'desc')
+                .get();
+            
+            allJobs = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            
+            // If no jobs in Firestore, fallback to dummy data
+            if (allJobs.length === 0) {
+                allJobs = getAllJobs();
+            }
+            
+            filteredJobs = [...allJobs];
+            displayJobs(filteredJobs);
+        } catch (error) {
+            console.error('Error loading jobs:', error);
+            // Fallback to dummy data on error
+            allJobs = getAllJobs();
+            filteredJobs = [...allJobs];
+            displayJobs(filteredJobs);
+        }
+    }
     
     function displayJobs(jobs) {
         const jobsList = document.getElementById('jobsList');
@@ -167,21 +202,67 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Apply to job function (global)
-function applyToJob(jobId) {
-    const job = getJobById(jobId);
-    if (!job) return;
+async function applyToJob(jobId) {
+    const db = getFirestore();
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
     
-    // Simulate application
-    const confirmed = confirm(`Apply to "${job.title}" for ${job.coins} coins?`);
+    if (!currentUser) {
+        alert('❌ Please login to apply for jobs.');
+        window.location.href = 'login.html';
+        return;
+    }
     
-    if (confirmed) {
-        // In a real app, this would send to backend
-        alert('Application submitted successfully! The client will review your application.');
+    try {
+        // Get job details
+        const jobDoc = await db.collection('jobs').doc(jobId).get();
+        if (!jobDoc.exists) {
+            alert('❌ Job not found.');
+            return;
+        }
         
-        // Update job applications count (simulation)
-        job.applications += 1;
+        const job = jobDoc.data();
         
-        // Could redirect to my jobs page
-        // window.location.href = 'my-jobs.html';
+        // Check if user already applied
+        const existingApplication = await db.collection('applications')
+            .where('jobId', '==', jobId)
+            .where('workerId', '==', currentUser.uid)
+            .get();
+        
+        if (!existingApplication.empty) {
+            alert('You have already applied to this job.');
+            return;
+        }
+        
+        // Confirm application
+        const confirmed = confirm(`Apply to "${job.title}" for ${job.coins} coins?`);
+        
+        if (confirmed) {
+            // Create application document
+            const user = getCurrentUser();
+            await db.collection('applications').add({
+                jobId: jobId,
+                workerId: currentUser.uid,
+                workerName: user.name,
+                workerEmail: user.email,
+                workerRating: user.rating || 0,
+                status: 'pending',
+                appliedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                message: 'I am interested in this job and have the required skills.'
+            });
+            
+            // Increment applications count
+            await db.collection('jobs').doc(jobId).update({
+                applications: firebase.firestore.FieldValue.increment(1)
+            });
+            
+            alert('✅ Application submitted successfully! The client will review your application.');
+            
+            // Reload jobs to update count
+            location.reload();
+        }
+    } catch (error) {
+        console.error('Error applying to job:', error);
+        alert('❌ Failed to apply. Please try again.');
     }
 }
