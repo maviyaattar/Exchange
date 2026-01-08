@@ -12,14 +12,68 @@ function hideLoading(button) {
     button.textContent = button.dataset.originalText || 'Submit';
 }
 
+// Alert System - Create styled alerts instead of using browser alert()
+function createAlertContainer() {
+    let container = document.getElementById('alert-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'alert-container';
+        container.className = 'alert-container';
+        document.body.appendChild(container);
+    }
+    return container;
+}
+
+function showAlert(title, message, type = 'info') {
+    const container = createAlertContainer();
+    
+    // Icon based on type
+    const icons = {
+        success: '<i class="fas fa-check-circle"></i>',
+        error: '<i class="fas fa-exclamation-circle"></i>',
+        warning: '<i class="fas fa-exclamation-triangle"></i>',
+        info: '<i class="fas fa-info-circle"></i>'
+    };
+    
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type}`;
+    alertDiv.innerHTML = `
+        <div class="alert-icon">${icons[type]}</div>
+        <div class="alert-content">
+            <div class="alert-title">${title}</div>
+            ${message ? `<div class="alert-message">${message}</div>` : ''}
+        </div>
+        <button class="alert-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    
+    // Add close functionality
+    const closeBtn = alertDiv.querySelector('.alert-close');
+    closeBtn.addEventListener('click', () => {
+        alertDiv.classList.add('fade-out');
+        setTimeout(() => alertDiv.remove(), 300);
+    });
+    
+    container.appendChild(alertDiv);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (alertDiv.parentElement) {
+            alertDiv.classList.add('fade-out');
+            setTimeout(() => alertDiv.remove(), 300);
+        }
+    }, 5000);
+}
+
 // Helper function to show error messages
-function showError(message) {
-    alert('❌ Error: ' + message);
+function showError(message, details = '') {
+    showAlert('Error', details || message, 'error');
 }
 
 // Helper function to show success messages
 function showSuccess(message) {
-    alert('✅ ' + message);
+    showAlert('Success', message, 'success');
 }
 
 // Create user profile in Firestore
@@ -27,17 +81,28 @@ async function createUserProfile(user, additionalData = {}) {
     const db = getFirestore();
     const userRef = db.collection('users').doc(user.uid);
     
+    // Check if profile already exists
+    try {
+        const existingProfile = await userRef.get();
+        if (existingProfile.exists) {
+            return existingProfile.data();
+        }
+    } catch (error) {
+        console.log('Checking existing profile:', error);
+    }
+    
     const userData = {
         uid: user.uid,
         email: user.email,
         name: additionalData.name || user.displayName || user.email.split('@')[0],
-        role: additionalData.role || 'worker',
-        coins: additionalData.role === 'client' ? 5000 : 0,
+        role: additionalData.role || 'worker', // Default to worker role
+        coins: 0, // All new users start with 0 coins
         lockedCoins: 0,
         earnedCoins: 0,
         rating: 0,
         completedJobs: 0,
         activeJobs: 0,
+        photoURL: user.photoURL || null,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     };
@@ -46,7 +111,7 @@ async function createUserProfile(user, additionalData = {}) {
         await userRef.set(userData);
         return userData;
     } catch (error) {
-        console.error('Error creating user profile:', error);
+        showError('Failed to create user profile', error.message);
         throw error;
     }
 }
@@ -61,7 +126,7 @@ async function getUserProfile(uid) {
         }
         return null;
     } catch (error) {
-        console.error('Error getting user profile:', error);
+        showError('Failed to get user profile', error.message);
         throw error;
     }
 }
@@ -93,8 +158,7 @@ async function logout() {
         clearUserData();
         window.location.href = '../index.html';
     } catch (error) {
-        console.error('Logout error:', error);
-        showError('Failed to logout. Please try again.');
+        showError('Failed to logout', error.message);
     }
 }
 
@@ -152,21 +216,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('User profile not found');
                 }
             } catch (error) {
-                console.error('Login error:', error);
                 hideLoading(submitBtn);
                 
-                // Handle specific error codes
+                // Handle specific error codes with detailed messages
+                let errorTitle = 'Login Failed';
+                let errorMessage = '';
+                
                 if (error.code === 'auth/user-not-found') {
-                    showError('No account found with this email. Please register first.');
+                    errorMessage = 'No account found with this email. Please register first.';
                 } else if (error.code === 'auth/wrong-password') {
-                    showError('Incorrect password. Please try again.');
+                    errorMessage = 'Incorrect password. Please try again.';
                 } else if (error.code === 'auth/invalid-email') {
-                    showError('Invalid email address.');
+                    errorMessage = 'Invalid email address format.';
                 } else if (error.code === 'auth/too-many-requests') {
-                    showError('Too many failed login attempts. Please try again later.');
+                    errorMessage = 'Too many failed login attempts. Please try again later.';
+                } else if (error.code === 'auth/user-disabled') {
+                    errorMessage = 'This account has been disabled.';
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorMessage = 'Network error. Please check your connection.';
                 } else {
-                    showError(error.message || 'Login failed. Please try again.');
+                    errorMessage = error.message || 'An unexpected error occurred. Please try again.';
                 }
+                
+                showError(errorTitle, errorMessage);
             }
         });
     }
@@ -178,12 +250,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const role = document.querySelector('input[name="role"]:checked').value;
+            // Default all users to worker role for simplified onboarding
+            const role = 'worker';
             const submitBtn = registerForm.querySelector('button[type="submit"]');
             
             // Validate password length
             if (password.length < 6) {
-                showError('Password must be at least 6 characters long.');
+                showError('Password Too Short', 'Password must be at least 6 characters long.');
                 return;
             }
             
@@ -203,22 +276,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 const userData = await createUserProfile(user, { name, role });
                 
                 saveUserData(userData);
-                showSuccess('Registration successful! Welcome to WorkCoin!');
-                window.location.href = 'dashboard.html';
+                showSuccess('Welcome to WorkCoin! Your account has been created successfully.');
+                
+                // Redirect after a short delay to show success message
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
             } catch (error) {
-                console.error('Registration error:', error);
                 hideLoading(submitBtn);
                 
-                // Handle specific error codes
+                // Handle specific error codes with detailed messages
+                let errorTitle = 'Registration Failed';
+                let errorMessage = '';
+                
                 if (error.code === 'auth/email-already-in-use') {
-                    showError('An account with this email already exists. Please login instead.');
+                    errorMessage = 'An account with this email already exists. Please login instead.';
                 } else if (error.code === 'auth/invalid-email') {
-                    showError('Invalid email address.');
+                    errorMessage = 'Invalid email address format.';
                 } else if (error.code === 'auth/weak-password') {
-                    showError('Password is too weak. Please use a stronger password.');
+                    errorMessage = 'Password is too weak. Please use a stronger password with letters, numbers, and symbols.';
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorMessage = 'Network error. Please check your connection.';
+                } else if (error.code === 'auth/operation-not-allowed') {
+                    errorMessage = 'Email/password authentication is not enabled. Please contact support.';
                 } else {
-                    showError(error.message || 'Registration failed. Please try again.');
+                    errorMessage = error.message || 'An unexpected error occurred. Please try again.';
                 }
+                
+                showError(errorTitle, errorMessage);
             }
         });
     }
@@ -239,7 +324,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     role: 'worker'
                 });
                 
-                userData.coins = 500; // Give guest some starting coins
+                // Give guest some starting coins
+                userData.coins = 500;
                 
                 // Update the profile with starting coins
                 const db = getFirestore();
@@ -248,11 +334,77 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 saveUserData(userData);
-                window.location.href = 'dashboard.html';
+                showSuccess('Welcome! You are signed in as a guest.');
+                
+                // Redirect after a short delay
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
             } catch (error) {
-                console.error('Guest login error:', error);
                 hideLoading(guestBtn);
-                showError('Failed to continue as guest. Please try again.');
+                showError('Guest Login Failed', error.message || 'Failed to continue as guest. Please try again.');
+            }
+        });
+    }
+    
+    // Google Sign-In Button Handler
+    const googleSignInBtn = document.getElementById('googleSignInBtn');
+    if (googleSignInBtn) {
+        googleSignInBtn.addEventListener('click', async function() {
+            showLoading(googleSignInBtn);
+            
+            try {
+                const auth = getAuth();
+                const provider = new firebase.auth.GoogleAuthProvider();
+                
+                // Request additional scopes if needed
+                provider.addScope('profile');
+                provider.addScope('email');
+                
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
+                
+                // Create or get user profile
+                const userData = await createUserProfile(user, {
+                    name: user.displayName,
+                    role: 'worker'
+                });
+                
+                saveUserData(userData);
+                
+                // Check if this is a new user
+                const isNewUser = result.additionalUserInfo?.isNewUser;
+                if (isNewUser) {
+                    showSuccess('Welcome to WorkCoin! Your account has been created successfully.');
+                } else {
+                    showSuccess('Welcome back!');
+                }
+                
+                // Redirect after a short delay
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            } catch (error) {
+                hideLoading(googleSignInBtn);
+                
+                let errorTitle = 'Google Sign-In Failed';
+                let errorMessage = '';
+                
+                if (error.code === 'auth/popup-closed-by-user') {
+                    errorMessage = 'Sign-in popup was closed. Please try again.';
+                } else if (error.code === 'auth/popup-blocked') {
+                    errorMessage = 'Sign-in popup was blocked by your browser. Please allow popups and try again.';
+                } else if (error.code === 'auth/cancelled-popup-request') {
+                    errorMessage = 'Sign-in was cancelled. Please try again.';
+                } else if (error.code === 'auth/account-exists-with-different-credential') {
+                    errorMessage = 'An account already exists with the same email but different sign-in method. Please use your original sign-in method.';
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorMessage = 'Network error. Please check your connection.';
+                } else {
+                    errorMessage = error.message || 'An unexpected error occurred. Please try again.';
+                }
+                
+                showError(errorTitle, errorMessage);
             }
         });
     }

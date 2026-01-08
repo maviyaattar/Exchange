@@ -46,31 +46,13 @@
                         type="password" 
                         id="password" 
                         class="form-input" 
-                        placeholder="Create a strong password"
+                        placeholder="Create a strong password (min. 6 characters)"
                         required
+                        minlength="6"
                     >
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">I want to</label>
-                    <div class="role-selector">
-                        <label class="role-option">
-                            <input type="radio" name="role" value="worker" checked>
-                            <div class="role-card">
-                                <div class="role-icon"><i class="fas fa-briefcase"></i></div>
-                                <div class="role-title">Find Work</div>
-                                <div class="role-desc">I want to work and earn coins</div>
-                            </div>
-                        </label>
-                        <label class="role-option">
-                            <input type="radio" name="role" value="client">
-                            <div class="role-card">
-                                <div class="role-icon"><i class="fas fa-edit"></i></div>
-                                <div class="role-title">Post Work</div>
-                                <div class="role-desc">I want to hire workers</div>
-                            </div>
-                        </label>
-                    </div>
+                    <small style="color: var(--text-secondary); font-size: var(--font-size-xs);">
+                        Must be at least 6 characters long
+                    </small>
                 </div>
                 
                 <div class="form-group">
@@ -81,6 +63,14 @@
                 </div>
                 
                 <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+                
+                <button type="button" class="btn btn-outline btn-block" id="googleSignInBtn">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
             </form>
             
             <div class="auth-footer">
