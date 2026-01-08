@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
             
             // Simulate login (no real authentication)
             const userData = {
@@ -61,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
             const role = document.querySelector('input[name="role"]:checked').value;
             
             // Simulate registration

@@ -197,6 +197,10 @@ a:hover {
     cursor: not-allowed;
 }
 
+.btn-block {
+    width: 100%;
+}
+
 /* Cards */
 .card {
     background-color: var(--bg-color);

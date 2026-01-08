@@ -79,19 +79,7 @@ function postJob(jobData) {
     // Save updated user
     localStorage.setItem('workcoin_user', JSON.stringify(user));
     
-    // Create new job (in real app, this would go to backend)
-    const newJob = {
-        id: Date.now(),
-        ...jobData,
-        status: 'open',
-        clientId: user.id || 1,
-        clientName: user.name,
-        clientRating: user.rating || 4.5,
-        applications: 0,
-        postedDate: new Date().toISOString().split('T')[0],
-        daysLeft: calculateDaysLeft(jobData.deadline),
-        categoryIcon: getCategoryIcon(jobData.category)
-    };
+    // In a real app, jobData would be sent to the backend here.
     
     // Show success message
     alert(
