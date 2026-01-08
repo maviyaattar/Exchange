@@ -311,6 +311,45 @@ a:hover {
     to { transform: rotate(360deg); }
 }
 
+/* Loading States */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-2xl);
+    color: var(--text-secondary);
+}
+
+/* Icon Styling */
+.fas, .far, .fab {
+    margin-right: 0.25rem;
+}
+
+.nav-icon i {
+    font-size: 1.25rem;
+}
+
+.step-icon i,
+.category-icon i {
+    font-size: 2.5rem;
+}
+
+/* Improved touch targets for mobile */
+@media (max-width: 768px) {
+    .btn {
+        min-height: 44px;
+        padding: var(--spacing-sm) var(--spacing-lg);
+    }
+    
+    .nav-item,
+    a,
+    button {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
     :root {
@@ -320,5 +359,29 @@ a:hover {
     
     .container {
         padding: 0 var(--spacing-sm);
+    }
+    
+    /* Stack elements on mobile */
+    .hero-stats,
+    .steps-grid,
+    .categories-grid,
+    .jobs-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Improve form spacing on mobile */
+    .form-group {
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* Tablet Responsive */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .jobs-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 }
