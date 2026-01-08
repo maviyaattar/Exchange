@@ -27,6 +27,12 @@ function createAlertContainer() {
 function showAlert(title, message, type = 'info') {
     const container = createAlertContainer();
     
+    // Validate type parameter to prevent XSS
+    const validTypes = ['success', 'error', 'warning', 'info'];
+    if (!validTypes.includes(type)) {
+        type = 'info';
+    }
+    
     // Icon based on type
     const icons = {
         success: '<i class="fas fa-check-circle"></i>',
