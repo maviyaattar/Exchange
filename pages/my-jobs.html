@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Jobs - WorkCoin</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/jobs.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">💰 WorkCoin</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="browse-jobs.html" class="nav-item">
+                    <span class="nav-icon">💼</span>
+                    <span class="nav-text">Browse Jobs</span>
+                </a>
+                <a href="my-jobs.html" class="nav-item active">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">My Jobs</span>
+                </a>
+                <a href="post-job.html" class="nav-item">
+                    <span class="nav-icon">➕</span>
+                    <span class="nav-text">Post Job</span>
+                </a>
+                <a href="wallet.html" class="nav-item">
+                    <span class="nav-icon">💰</span>
+                    <span class="nav-text">Wallet</span>
+                </a>
+                <a href="notifications.html" class="nav-item">
+                    <span class="nav-icon">🔔</span>
+                    <span class="nav-text">Notifications</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">Profile</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="header-title">
+                    <h1>My Jobs</h1>
+                </div>
+                <div class="header-actions">
+                    <div class="coin-display">
+                        <span class="coin-icon">💰</span>
+                        <span class="coin-amount" id="headerCoins">0</span>
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-avatar" id="userAvatar">👤</div>
+                        <span class="user-name" id="userName">User</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- My Jobs Content -->
+            <div class="content-wrapper">
+                <!-- Tabs -->
+                <div class="tabs-container">
+                    <div class="tabs-nav">
+                        <button class="tab-btn active" data-tab="active">Active Jobs</button>
+                        <button class="tab-btn" data-tab="in-progress">In Progress</button>
+                        <button class="tab-btn" data-tab="completed">Completed</button>
+                    </div>
+                    
+                    <!-- Active Jobs Tab -->
+                    <div class="tab-content active" id="active-tab">
+                        <div class="my-jobs-list" id="activeJobsList">
+                            <!-- Jobs will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- In Progress Tab -->
+                    <div class="tab-content" id="in-progress-tab">
+                        <div class="my-jobs-list" id="inProgressJobsList">
+                            <!-- Jobs will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Completed Tab -->
+                    <div class="tab-content" id="completed-tab">
+                        <div class="my-jobs-list" id="completedJobsList">
+                            <!-- Jobs will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Navigation (Mobile) -->
+        <nav class="bottom-nav">
+            <a href="dashboard.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">📊</span>
+                <span class="bottom-nav-text">Dashboard</span>
+            </a>
+            <a href="browse-jobs.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">💼</span>
+                <span class="bottom-nav-text">Jobs</span>
+            </a>
+            <a href="post-job.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">➕</span>
+                <span class="bottom-nav-text">Post</span>
+            </a>
+            <a href="wallet.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">💰</span>
+                <span class="bottom-nav-text">Wallet</span>
+            </a>
+            <a href="profile.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">👤</span>
+                <span class="bottom-nav-text">Profile</span>
+            </a>
+        </nav>
+    </div>
+    
+    <script src="../js/data.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/my-jobs.js"></script>
+</body>
+</html>
