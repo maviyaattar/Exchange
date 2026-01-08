@@ -1,13 +1,78 @@
 // Wallet Logic
-document.addEventListener('DOMContentLoaded', function() {
-    const user = getCurrentUser();
+document.addEventListener('DOMContentLoaded', async function() {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
     
-    // Update balances
-    updateBalances(user);
-    
-    // Load transaction history
-    loadTransactions();
+    if (currentUser) {
+        await loadUserBalance();
+        await loadTransactionsFromFirestore();
+    } else {
+        // Fallback to localStorage
+        const user = getCurrentUser();
+        updateBalances(user);
+        loadTransactions();
+    }
 });
+
+async function loadUserBalance() {
+    const auth = getAuth();
+    const db = getFirestore();
+    const currentUser = auth.currentUser;
+    
+    if (!currentUser) return;
+    
+    try {
+        const userDoc = await db.collection('users').doc(currentUser.uid).get();
+        if (userDoc.exists) {
+            const userData = userDoc.data();
+            updateBalances(userData);
+            
+            // Update localStorage
+            saveUserData(userData);
+        }
+    } catch (error) {
+        console.error('Error loading user balance:', error);
+    }
+}
+
+async function loadTransactionsFromFirestore() {
+    const auth = getAuth();
+    const db = getFirestore();
+    const currentUser = auth.currentUser;
+    const container = document.getElementById('transactionsList');
+    
+    if (!currentUser || !container) {
+        loadTransactions();
+        return;
+    }
+    
+    try {
+        const snapshot = await db.collection('transactions')
+            .where('userId', '==', currentUser.uid)
+            .orderBy('createdAt', 'desc')
+            .limit(50)
+            .get();
+        
+        if (snapshot.empty) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: var(--spacing-3xl); color: var(--text-secondary);">
+                    <p>No transactions yet</p>
+                </div>
+            `;
+            return;
+        }
+        
+        const transactions = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+        
+        container.innerHTML = transactions.map(transaction => createTransactionItem(transaction)).join('');
+    } catch (error) {
+        console.error('Error loading transactions:', error);
+        loadTransactions();
+    }
+}
 
 function updateBalances(user) {
     document.getElementById('totalCoins').textContent = user.coins.toLocaleString();
@@ -54,37 +119,55 @@ function createTransactionItem(transaction) {
     `;
 }
 
-function addCoins() {
-    const amount = prompt('How many coins would you like to add?\n\n(Note: This is a UI simulation only)');
+async function addCoins() {
+    const amount = prompt('How many coins would you like to add?');
     
     if (amount && !isNaN(amount) && parseInt(amount) > 0) {
         const coins = parseInt(amount);
+        const auth = getAuth();
+        const currentUser = auth.currentUser;
         
-        // Update user coins
-        const user = getCurrentUser();
-        user.coins += coins;
-        localStorage.setItem('workcoin_user', JSON.stringify(user));
+        if (!currentUser) {
+            alert('Please login to add coins');
+            return;
+        }
         
-        // Add transaction
-        const transactions = getTransactions();
-        transactions.unshift({
-            id: Date.now(),
-            date: new Date().toISOString().split('T')[0],
-            description: 'Coins added to wallet',
-            amount: coins,
-            type: 'credit'
-        });
+        const db = getFirestore();
         
-        alert(`✅ ${coins} coins added to your wallet!`);
-        
-        // Reload page
-        location.reload();
+        try {
+            // Update user coins
+            await db.collection('users').doc(currentUser.uid).update({
+                coins: firebase.firestore.FieldValue.increment(coins),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            // Add transaction record
+            await db.collection('transactions').add({
+                userId: currentUser.uid,
+                date: new Date().toISOString().split('T')[0],
+                description: 'Coins added to wallet',
+                amount: coins,
+                type: 'credit',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            // Update localStorage
+            const user = getCurrentUser();
+            user.coins += coins;
+            saveUserData(user);
+            
+            alert(`✅ ${coins} coins added to your wallet!`);
+            location.reload();
+        } catch (error) {
+            console.error('Error adding coins:', error);
+            alert('❌ Failed to add coins. Please try again.');
+        }
     } else if (amount !== null) {
         alert('Please enter a valid amount');
     }
 }
 
-function withdrawCoins() {
+async function withdrawCoins() {
     const user = getCurrentUser();
     
     if (user.coins === 0) {
@@ -102,24 +185,43 @@ function withdrawCoins() {
             return;
         }
         
-        // Update user coins
-        user.coins -= coins;
-        localStorage.setItem('workcoin_user', JSON.stringify(user));
+        const auth = getAuth();
+        const currentUser = auth.currentUser;
         
-        // Add transaction
-        const transactions = getTransactions();
-        transactions.unshift({
-            id: Date.now(),
-            date: new Date().toISOString().split('T')[0],
-            description: 'Withdrawal to bank account',
-            amount: -coins,
-            type: 'debit'
-        });
+        if (!currentUser) {
+            alert('Please login to withdraw coins');
+            return;
+        }
         
-        alert(`✅ Withdrawal of ${coins} coins initiated!\n\nThe amount will be transferred to your bank account within 2-3 business days.`);
+        const db = getFirestore();
         
-        // Reload page
-        location.reload();
+        try {
+            // Update user coins
+            await db.collection('users').doc(currentUser.uid).update({
+                coins: firebase.firestore.FieldValue.increment(-coins),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            // Add transaction record
+            await db.collection('transactions').add({
+                userId: currentUser.uid,
+                date: new Date().toISOString().split('T')[0],
+                description: 'Withdrawal to bank account',
+                amount: -coins,
+                type: 'debit',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            // Update localStorage
+            user.coins -= coins;
+            saveUserData(user);
+            
+            alert(`✅ Withdrawal of ${coins} coins initiated!\n\nThe amount will be transferred to your bank account within 2-3 business days.`);
+            location.reload();
+        } catch (error) {
+            console.error('Error withdrawing coins:', error);
+            alert('❌ Failed to withdraw coins. Please try again.');
+        }
     } else if (amount !== null) {
         alert('Please enter a valid amount');
     }
