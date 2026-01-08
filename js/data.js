@@ -27,7 +27,7 @@ const DUMMY_DATA = {
             deliverables: ['Fully responsive HTML/CSS/JS code', 'Mobile-optimized design', 'Cross-browser compatibility', 'Source files'],
             coins: 500,
             category: 'Web Development',
-            categoryIcon: '💻',
+            categoryIcon: '<i class="fas fa-code"></i>',
             deadline: '2024-02-15',
             daysLeft: 5,
             status: 'open',
@@ -45,7 +45,7 @@ const DUMMY_DATA = {
             deliverables: ['3 initial logo concepts', '2 rounds of revisions', 'Vector files (AI, SVG, EPS)', 'PNG files in various sizes', 'Brand guidelines document'],
             coins: 350,
             category: 'Design',
-            categoryIcon: '🎨',
+            categoryIcon: '<i class="fas fa-palette"></i>',
             deadline: '2024-02-20',
             daysLeft: 7,
             status: 'open',
@@ -63,7 +63,7 @@ const DUMMY_DATA = {
             deliverables: ['5 blog articles (1000-1500 words each)', 'SEO-optimized content', 'Keyword research included', 'Meta descriptions', 'Royalty-free images'],
             coins: 200,
             category: 'Writing',
-            categoryIcon: '✍️',
+            categoryIcon: '<i class="fas fa-pen"></i>',
             deadline: '2024-02-25',
             daysLeft: 10,
             status: 'open',
@@ -81,7 +81,7 @@ const DUMMY_DATA = {
             deliverables: ['User flow diagrams', 'Wireframes for all screens', 'High-fidelity mockups', 'Interactive prototype', 'Design system documentation'],
             coins: 800,
             category: 'Mobile Apps',
-            categoryIcon: '📱',
+            categoryIcon: '<i class="fas fa-mobile-alt"></i>',
             deadline: '2024-03-01',
             daysLeft: 15,
             status: 'open',
@@ -99,7 +99,7 @@ const DUMMY_DATA = {
             deliverables: ['Data cleaning and preprocessing', 'Statistical analysis report', 'Interactive dashboards', 'Insights and recommendations', 'Python scripts'],
             coins: 600,
             category: 'Data Analysis',
-            categoryIcon: '📊',
+            categoryIcon: '<i class="fas fa-chart-line"></i>',
             deadline: '2024-02-28',
             daysLeft: 12,
             status: 'open',
@@ -117,7 +117,7 @@ const DUMMY_DATA = {
             deliverables: ['3-minute edited video', 'Professional color grading', 'Text overlays and animations', 'Background music integration', 'Multiple format exports'],
             coins: 450,
             category: 'Video Editing',
-            categoryIcon: '🎬',
+            categoryIcon: '<i class="fas fa-video"></i>',
             deadline: '2024-02-22',
             daysLeft: 8,
             status: 'open',
@@ -242,12 +242,12 @@ const DUMMY_DATA = {
     
     // Categories
     categories: [
-        { name: 'Web Development', icon: '💻', count: 1234 },
-        { name: 'Design', icon: '🎨', count: 856 },
-        { name: 'Writing', icon: '✍️', count: 643 },
-        { name: 'Mobile Apps', icon: '📱', count: 512 },
-        { name: 'Data Analysis', icon: '📊', count: 389 },
-        { name: 'Video Editing', icon: '🎬', count: 275 }
+        { name: 'Web Development', icon: '<i class="fas fa-code"></i>', count: 1234 },
+        { name: 'Design', icon: '<i class="fas fa-palette"></i>', count: 856 },
+        { name: 'Writing', icon: '<i class="fas fa-pen"></i>', count: 643 },
+        { name: 'Mobile Apps', icon: '<i class="fas fa-mobile-alt"></i>', count: 512 },
+        { name: 'Data Analysis', icon: '<i class="fas fa-chart-line"></i>', count: 389 },
+        { name: 'Video Editing', icon: '<i class="fas fa-video"></i>', count: 275 }
     ]
 };
 

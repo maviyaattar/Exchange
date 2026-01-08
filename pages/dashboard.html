@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - WorkCoin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
@@ -12,44 +13,44 @@
         <!-- Sidebar Navigation (Desktop) -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="logo">💰 WorkCoin</div>
+                <div class="logo"><i class="fas fa-coins"></i> WorkCoin</div>
             </div>
             <nav class="sidebar-nav">
                 <a href="dashboard.html" class="nav-item active">
-                    <span class="nav-icon">📊</span>
+                    <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
                     <span class="nav-text">Dashboard</span>
                 </a>
                 <a href="browse-jobs.html" class="nav-item">
-                    <span class="nav-icon">💼</span>
+                    <span class="nav-icon"><i class="fas fa-briefcase"></i></span>
                     <span class="nav-text">Browse Jobs</span>
                 </a>
                 <a href="my-jobs.html" class="nav-item">
-                    <span class="nav-icon">📋</span>
+                    <span class="nav-icon"><i class="fas fa-tasks"></i></span>
                     <span class="nav-text">My Jobs</span>
                 </a>
                 <a href="post-job.html" class="nav-item">
-                    <span class="nav-icon">➕</span>
+                    <span class="nav-icon"><i class="fas fa-plus-circle"></i></span>
                     <span class="nav-text">Post Job</span>
                 </a>
                 <a href="wallet.html" class="nav-item">
-                    <span class="nav-icon">💰</span>
+                    <span class="nav-icon"><i class="fas fa-wallet"></i></span>
                     <span class="nav-text">Wallet</span>
                 </a>
                 <a href="chat.html" class="nav-item">
-                    <span class="nav-icon">💬</span>
+                    <span class="nav-icon"><i class="fas fa-comments"></i></span>
                     <span class="nav-text">Messages</span>
                 </a>
                 <a href="notifications.html" class="nav-item">
-                    <span class="nav-icon">🔔</span>
+                    <span class="nav-icon"><i class="fas fa-bell"></i></span>
                     <span class="nav-text">Notifications</span>
                     <span class="badge badge-error" id="notifBadge">0</span>
                 </a>
                 <a href="profile.html" class="nav-item">
-                    <span class="nav-icon">👤</span>
+                    <span class="nav-icon"><i class="fas fa-user"></i></span>
                     <span class="nav-text">Profile</span>
                 </a>
                 <a href="settings.html" class="nav-item">
-                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-icon"><i class="fas fa-cog"></i></span>
                     <span class="nav-text">Settings</span>
                 </a>
             </nav>
@@ -69,11 +70,11 @@
                 </div>
                 <div class="header-actions">
                     <div class="coin-display">
-                        <span class="coin-icon">💰</span>
+                        <span class="coin-icon"><i class="fas fa-coins"></i></span>
                         <span class="coin-amount" id="headerCoins">0</span>
                     </div>
                     <div class="user-menu">
-                        <div class="user-avatar" id="userAvatar">👤</div>
+                        <div class="user-avatar" id="userAvatar"><i class="fas fa-user"></i></div>
                         <span class="user-name" id="userName">User</span>
                     </div>
                 </div>
@@ -191,6 +192,14 @@
         </nav>
     </div>
     
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+    
+    <!-- Firebase Initialization -->
+    <script src="../js/firebase-init.js"></script>
     <script src="../js/data.js"></script>
     <script src="../js/dashboard.js"></script>
 </body>

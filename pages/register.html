@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - WorkCoin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/auth.css">
 </head>
@@ -11,7 +12,7 @@
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">
-                <div class="logo">💰 WorkCoin</div>
+                <div class="logo"><i class="fas fa-coins"></i> WorkCoin</div>
                 <h1>Create Account</h1>
                 <p>Join WorkCoin and start your journey</p>
             </div>
@@ -56,7 +57,7 @@
                         <label class="role-option">
                             <input type="radio" name="role" value="worker" checked>
                             <div class="role-card">
-                                <div class="role-icon">💼</div>
+                                <div class="role-icon"><i class="fas fa-briefcase"></i></div>
                                 <div class="role-title">Find Work</div>
                                 <div class="role-desc">I want to work and earn coins</div>
                             </div>
@@ -64,7 +65,7 @@
                         <label class="role-option">
                             <input type="radio" name="role" value="client">
                             <div class="role-card">
-                                <div class="role-icon">📝</div>
+                                <div class="role-icon"><i class="fas fa-edit"></i></div>
                                 <div class="role-title">Post Work</div>
                                 <div class="role-desc">I want to hire workers</div>
                             </div>
@@ -88,6 +89,15 @@
         </div>
     </div>
     
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+    
+    <!-- Firebase Initialization -->
+    <script src="../js/firebase-init.js"></script>
+    <script src="../js/data.js"></script>
     <script src="../js/auth.js"></script>
 </body>
 </html>
