@@ -1,0 +1,150 @@
+/* ==========================================
+   WALLET PAGE STYLES
+   ========================================== */
+
+.balance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.balance-card {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.balance-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+
+.balance-card.primary::before { background-color: var(--primary-color); }
+.balance-card.warning::before { background-color: var(--warning-color); }
+.balance-card.success::before { background-color: var(--success-color); }
+
+.balance-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.balance-amount {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.balance-desc {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.wallet-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.transactions-container {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.transactions-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color var(--transition-fast);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-item:hover {
+    background-color: var(--bg-secondary);
+}
+
+.transaction-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xl);
+}
+
+.transaction-icon.credit {
+    background-color: rgba(16, 185, 129, 0.1);
+}
+
+.transaction-icon.debit {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.transaction-details {
+    flex: 1;
+}
+
+.transaction-description {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.transaction-date {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.transaction-amount {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    text-align: right;
+}
+
+.transaction-amount.credit {
+    color: var(--success-color);
+}
+
+.transaction-amount.debit {
+    color: var(--error-color);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .balance-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .wallet-actions {
+        flex-direction: column;
+    }
+    
+    .balance-amount {
+        font-size: var(--font-size-3xl);
+    }
+}
