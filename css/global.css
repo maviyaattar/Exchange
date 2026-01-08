@@ -253,6 +253,13 @@ a:hover {
     min-height: 120px;
 }
 
+.form-hint {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
 /* Badges */
 .badge {
     display: inline-block;

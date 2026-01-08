@@ -114,7 +114,7 @@ async function createUserProfile(user, additionalData = {}) {
         email: user.email,
         name: additionalData.name || user.displayName || user.email.split('@')[0],
         role: additionalData.role || 'worker', // Default to worker role
-        coins: 0, // All new users start with 0 coins
+        coins: additionalData.coins || 0, // Starting coins (can be overridden for special cases like guest users)
         lockedCoins: 0,
         earnedCoins: 0,
         rating: 0,
@@ -339,11 +339,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Create guest user profile
                 const userData = await createUserProfile(user, {
                     name: 'Guest User',
-                    role: 'worker'
+                    role: 'worker',
+                    coins: 500 // Give guest some starting coins
                 });
-                
-                // Give guest some starting coins
-                userData.coins = 500;
                 
                 // Update the profile with starting coins
                 const db = getFirestore();
@@ -373,6 +371,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 const auth = getAuth();
+                // Using Firebase v9 compat API for GoogleAuthProvider
                 const provider = new firebase.auth.GoogleAuthProvider();
                 
                 // Request additional scopes if needed
