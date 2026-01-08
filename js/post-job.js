@@ -146,12 +146,12 @@ function calculateDaysLeft(deadline) {
 
 function getCategoryIcon(category) {
     const icons = {
-        'Web Development': '💻',
-        'Design': '🎨',
-        'Writing': '✍️',
-        'Mobile Apps': '📱',
-        'Data Analysis': '📊',
-        'Video Editing': '🎬'
+        'Web Development': '<i class="fas fa-code"></i>',
+        'Design': '<i class="fas fa-palette"></i>',
+        'Writing': '<i class="fas fa-pen"></i>',
+        'Mobile Apps': '<i class="fas fa-mobile-alt"></i>',
+        'Data Analysis': '<i class="fas fa-chart-line"></i>',
+        'Video Editing': '<i class="fas fa-video"></i>'
     };
-    return icons[category] || '💼';
+    return icons[category] || '<i class="fas fa-briefcase"></i>';
 }

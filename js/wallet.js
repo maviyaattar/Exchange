@@ -35,7 +35,7 @@ function loadTransactions() {
 
 function createTransactionItem(transaction) {
     const isCredit = transaction.type === 'credit';
-    const icon = isCredit ? '💰' : '💸';
+    const icon = isCredit ? '<i class="fas fa-coins"></i>' : '<i class="fas fa-minus-circle"></i>';
     const amountPrefix = isCredit ? '+' : '';
     
     return `
@@ -48,7 +48,7 @@ function createTransactionItem(transaction) {
                 <div class="transaction-date">${transaction.date}</div>
             </div>
             <div class="transaction-amount ${transaction.type}">
-                ${amountPrefix}${Math.abs(transaction.amount)} 💰
+                ${amountPrefix}${Math.abs(transaction.amount)} <i class="fas fa-coins"></i>
             </div>
         </div>
     `;

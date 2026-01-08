@@ -145,13 +145,13 @@ function loadActiveJobs() {
 
 function getNotificationIcon(type) {
     const icons = {
-        'application': '📋',
-        'payment': '💰',
-        'approval': '✅',
-        'reminder': '⏰',
-        'message': '💬'
+        'application': '<i class="fas fa-file-alt"></i>',
+        'payment': '<i class="fas fa-coins"></i>',
+        'approval': '<i class="fas fa-check-circle"></i>',
+        'reminder': '<i class="far fa-clock"></i>',
+        'message': '<i class="fas fa-comment"></i>'
     };
-    return icons[type] || '📢';
+    return icons[type] || '<i class="fas fa-bell"></i>';
 }
 
 function formatDate(dateString) {

@@ -84,25 +84,25 @@ document.addEventListener('DOMContentLoaded', async function() {
                     <div class="job-card-title">
                         <h3>${job.title}</h3>
                         <div class="job-card-client">
-                            👤 ${job.clientName} • ⭐ ${job.clientRating}
+                            <i class="fas fa-user"></i> ${job.clientName} • <i class="fas fa-star"></i> ${job.clientRating}
                         </div>
                     </div>
-                    <div class="job-card-coins">${job.coins} 💰</div>
+                    <div class="job-card-coins">${job.coins} <i class="fas fa-coins"></i></div>
                 </div>
                 
                 <p class="job-card-description">${job.description}</p>
                 
                 <div class="job-card-meta">
                     <span class="job-card-tag">${job.categoryIcon} ${job.category}</span>
-                    <span class="job-card-tag">⏰ ${job.daysLeft} days left</span>
-                    <span class="job-card-tag">📅 Posted ${job.postedDate}</span>
+                    <span class="job-card-tag"><i class="far fa-clock"></i> ${job.daysLeft} days left</span>
+                    <span class="job-card-tag"><i class="far fa-calendar"></i> Posted ${job.postedDate}</span>
                 </div>
                 
                 <div class="job-card-footer">
                     <div class="job-card-stats">
-                        <span>📋 ${job.applications} applications</span>
+                        <span><i class="fas fa-file-alt"></i> ${job.applications} applications</span>
                     </div>
-                    <button class="btn btn-primary btn-small" onclick="event.stopPropagation(); applyToJob(${job.id})">
+                    <button class="btn btn-primary btn-small" onclick="event.stopPropagation(); applyToJob('${job.id}')">
                         Apply Now
                     </button>
                 </div>
