@@ -21,8 +21,10 @@ async function initializeFCM() {
             console.log('Notification permission granted.');
             
             // Get FCM token
+            // Note: Replace with your VAPID key from Firebase Console
+            // Project Settings > Cloud Messaging > Web Push certificates
             const token = await messaging.getToken({
-                vapidKey: 'YOUR_VAPID_KEY_HERE' // Add your VAPID key from Firebase Console
+                vapidKey: 'BNxxx...' // TODO: Replace with your actual VAPID key
             });
             
             if (token) {

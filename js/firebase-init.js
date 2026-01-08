@@ -11,6 +11,10 @@ function initializeFirebase() {
     }
 
     try {
+        // Note: In production, Firebase configuration should be loaded from 
+        // environment variables or a secure configuration service.
+        // The API key here is safe to expose as it's meant for client-side use,
+        // but should be protected by Firebase Security Rules and proper domain restrictions.
         const firebaseConfig = {
             apiKey: "AIzaSyBt5enDVu9T_WVP3iJw_eOBc9dKrLME_Xo",
             authDomain: "skillexchange-706.firebaseapp.com",

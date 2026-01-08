@@ -4,6 +4,11 @@
 importScripts('https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.22.1/firebase-messaging-compat.js');
 
+// Note: In production, Firebase configuration should be loaded from
+// environment variables or a secure configuration service.
+// The API key here is safe to expose as it's meant for client-side use,
+// but should be protected by Firebase Security Rules and proper domain restrictions.
+
 // Initialize the Firebase app in the service worker
 firebase.initializeApp({
     apiKey: "AIzaSyBt5enDVu9T_WVP3iJw_eOBc9dKrLME_Xo",
