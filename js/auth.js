@@ -37,16 +37,28 @@ function showAlert(title, message, type = 'info') {
     
     const alertDiv = document.createElement('div');
     alertDiv.className = `alert alert-${type}`;
+    
+    // Create alert structure safely to prevent XSS
     alertDiv.innerHTML = `
         <div class="alert-icon">${icons[type]}</div>
         <div class="alert-content">
-            <div class="alert-title">${title}</div>
-            ${message ? `<div class="alert-message">${message}</div>` : ''}
+            <div class="alert-title"></div>
+            <div class="alert-message"></div>
         </div>
         <button class="alert-close" aria-label="Close">
             <i class="fas fa-times"></i>
         </button>
     `;
+    
+    // Set text content safely (prevents XSS)
+    const titleElement = alertDiv.querySelector('.alert-title');
+    const messageElement = alertDiv.querySelector('.alert-message');
+    titleElement.textContent = title;
+    if (message) {
+        messageElement.textContent = message;
+    } else {
+        messageElement.style.display = 'none';
+    }
     
     // Add close functionality
     const closeBtn = alertDiv.querySelector('.alert-close');
