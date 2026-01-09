@@ -46,8 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Navbar scroll effect
     if (navbar) {
-        let lastScroll = 0;
-        
         window.addEventListener('scroll', function() {
             const currentScroll = window.pageYOffset;
             
@@ -57,8 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 navbar.classList.remove('scrolled');
             }
-            
-            lastScroll = currentScroll;
         });
     }
 });

@@ -465,28 +465,22 @@
         font-weight: 700;
         opacity: 0;
         transform: translateX(50px);
+    }
+    
+    /* Staggered animation for menu items - works for any number of items */
+    .nav-menu.active .nav-link {
         animation: slideInRight 0.5s ease forwards;
+        animation-delay: calc(0.05s * var(--item-index, 1));
     }
     
-    .nav-menu.active .nav-link:nth-child(1) {
-        animation-delay: 0.1s;
-    }
-    
-    .nav-menu.active .nav-link:nth-child(2) {
-        animation-delay: 0.15s;
-    }
-    
-    .nav-menu.active .nav-link:nth-child(3) {
-        animation-delay: 0.2s;
-    }
-    
-    .nav-menu.active .nav-link:nth-child(4) {
-        animation-delay: 0.25s;
-    }
-    
-    .nav-menu.active .nav-link:nth-child(5) {
-        animation-delay: 0.3s;
-    }
+    .nav-menu.active .nav-link:nth-child(1) { --item-index: 1; }
+    .nav-menu.active .nav-link:nth-child(2) { --item-index: 2; }
+    .nav-menu.active .nav-link:nth-child(3) { --item-index: 3; }
+    .nav-menu.active .nav-link:nth-child(4) { --item-index: 4; }
+    .nav-menu.active .nav-link:nth-child(5) { --item-index: 5; }
+    .nav-menu.active .nav-link:nth-child(6) { --item-index: 6; }
+    .nav-menu.active .nav-link:nth-child(7) { --item-index: 7; }
+    .nav-menu.active .nav-link:nth-child(8) { --item-index: 8; }
     
     @keyframes slideInRight {
         to {
@@ -518,7 +512,7 @@
     }
     
     .nav-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translateY(8px);
+        transform: rotate(45deg) translateY(var(--nav-hamburger-offset));
         background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
     }
     
@@ -528,7 +522,7 @@
     }
     
     .nav-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translateY(-8px);
+        transform: rotate(-45deg) translateY(calc(-1 * var(--nav-hamburger-offset)));
         background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
     }
     
