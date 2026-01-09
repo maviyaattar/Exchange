@@ -1,481 +1,239 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
 <html lang="en">
 <head>
-<head>
-    <meta charset="UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>settings - Skill Exchange</title>
     <title>settings - Skill Exchange</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/settings.css">
     <link rel="stylesheet" href="../css/settings.css">
 </head>
-</head>
-<body>
 <body>
     <div class="app-layout">
-    <div class="app-layout">
-        <!-- Sidebar Navigation (Desktop) -->
         <!-- Sidebar Navigation (Desktop) -->
         <aside class="sidebar" id="sidebar">
-        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-            <div class="sidebar-header">
-                <div class="logo">💰 Skill Exchange</div>
-                <div class="logo">💰 Skill Exchange</div>
-            </div>
+                <div class="logo"><i class="fas fa-coins"></i> Skill Exchange</div>
             </div>
             <nav class="sidebar-nav">
-            <nav class="sidebar-nav">
                 <a href="dashboard.html" class="nav-item">
-                <a href="dashboard.html" class="nav-item">
-                    <span class="nav-icon">📊</span>
-                    <span class="nav-icon">📊</span>
-                    <span class="nav-text">Dashboard</span>
+                    <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
                     <span class="nav-text">Dashboard</span>
                 </a>
-                </a>
                 <a href="browse-jobs.html" class="nav-item">
-                <a href="browse-jobs.html" class="nav-item">
-                    <span class="nav-icon">💼</span>
-                    <span class="nav-icon">💼</span>
-                    <span class="nav-text">Browse Jobs</span>
+                    <span class="nav-icon"><i class="fas fa-briefcase"></i></span>
                     <span class="nav-text">Browse Jobs</span>
                 </a>
-                </a>
                 <a href="my-jobs.html" class="nav-item">
-                <a href="my-jobs.html" class="nav-item">
-                    <span class="nav-icon">📋</span>
-                    <span class="nav-icon">📋</span>
-                    <span class="nav-text">My Jobs</span>
+                    <span class="nav-icon"><i class="fas fa-tasks"></i></span>
                     <span class="nav-text">My Jobs</span>
                 </a>
-                </a>
                 <a href="post-job.html" class="nav-item">
-                <a href="post-job.html" class="nav-item">
-                    <span class="nav-icon">➕</span>
-                    <span class="nav-icon">➕</span>
-                    <span class="nav-text">Post Job</span>
+                    <span class="nav-icon"><i class="fas fa-plus-circle"></i></span>
                     <span class="nav-text">Post Job</span>
                 </a>
-                </a>
                 <a href="wallet.html" class="nav-item">
-                <a href="wallet.html" class="nav-item">
-                    <span class="nav-icon">💰</span>
-                    <span class="nav-icon">💰</span>
-                    <span class="nav-text">Wallet</span>
+                    <span class="nav-icon"><i class="fas fa-coins"></i></span>
                     <span class="nav-text">Wallet</span>
                 </a>
-                </a>
                 <a href="notifications.html" class="nav-item">
-                <a href="notifications.html" class="nav-item">
-                    <span class="nav-icon">🔔</span>
-                    <span class="nav-icon">🔔</span>
-                    <span class="nav-text">Notifications</span>
+                    <span class="nav-icon"><i class="fas fa-bell"></i></span>
                     <span class="nav-text">Notifications</span>
                 </a>
-                </a>
                 <a href="profile.html" class="nav-item">
-                <a href="profile.html" class="nav-item">
-                    <span class="nav-icon">👤</span>
-                    <span class="nav-icon">👤</span>
-                    <span class="nav-text">Profile</span>
+                    <span class="nav-icon"><i class="fas fa-user"></i></span>
                     <span class="nav-text">Profile</span>
                 </a>
-                </a>
                 <a href="settings.html" class="nav-item active">
-                <a href="settings.html" class="nav-item active">
-                    <span class="nav-icon">⚙️</span>
-                    <span class="nav-icon">⚙️</span>
-                    <span class="nav-text">Settings</span>
+                    <span class="nav-icon"><i class="fas fa-cog"></i></span>
                     <span class="nav-text">Settings</span>
                 </a>
-                </a>
-            </nav>
             </nav>
         </aside>
-        </aside>
-        
         
         <!-- Main Content -->
-        <!-- Main Content -->
-        <div class="main-content">
         <div class="main-content">
             <!-- Top Header -->
-            <!-- Top Header -->
-            <header class="top-header">
             <header class="top-header">
                 <button class="menu-toggle" id="menuToggle">
-                <button class="menu-toggle" id="menuToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
                     <span></span>
                 </button>
-                </button>
-                <div class="header-title">
                 <div class="header-title">
                     <h1>Settings</h1>
-                    <h1>Settings</h1>
-                </div>
                 </div>
                 <div class="header-actions">
-                <div class="header-actions">
                     <div class="coin-display">
-                    <div class="coin-display">
-                        <span class="coin-icon">💰</span>
-                        <span class="coin-icon">💰</span>
-                        <span class="coin-amount" id="headerCoins">0</span>
+                        <span class="coin-icon"><i class="fas fa-coins"></i></span>
                         <span class="coin-amount" id="headerCoins">0</span>
                     </div>
-                    </div>
                     <div class="user-menu">
-                    <div class="user-menu">
-                        <div class="user-avatar" id="userAvatar">👤</div>
-                        <div class="user-avatar" id="userAvatar">👤</div>
-                        <span class="user-name" id="userName">User</span>
+                        <div class="user-avatar" id="userAvatar"><i class="fas fa-user"></i></div>
                         <span class="user-name" id="userName">User</span>
                     </div>
-                    </div>
-                </div>
                 </div>
             </header>
-            </header>
-            
             
             <!-- Settings Content -->
-            <!-- Settings Content -->
-            <div class="content-wrapper">
             <div class="content-wrapper">
                 <div class="settings-container">
-                <div class="settings-container">
-                    <!-- Account Settings -->
                     <!-- Account Settings -->
                     <div class="settings-section">
-                    <div class="settings-section">
-                        <h3>👤 Account Settings</h3>
-                        <h3>👤 Account Settings</h3>
+                        <h3><i class="fas fa-user"></i> Account Settings</h3>
                         <div class="settings-item">
-                        <div class="settings-item">
-                            <div class="setting-info">
                             <div class="setting-info">
                                 <div class="setting-label">Email Address</div>
-                                <div class="setting-label">Email Address</div>
-                                <div class="setting-desc" id="userEmail">user@example.com</div>
                                 <div class="setting-desc" id="userEmail">user@example.com</div>
                             </div>
-                            </div>
-                            <button class="btn btn-outline btn-small" onclick="changeEmail()">Change</button>
                             <button class="btn btn-outline btn-small" onclick="changeEmail()">Change</button>
                         </div>
-                        </div>
                         <div class="settings-item">
-                        <div class="settings-item">
-                            <div class="setting-info">
                             <div class="setting-info">
                                 <div class="setting-label">Password</div>
-                                <div class="setting-label">Password</div>
-                                <div class="setting-desc">••••••••</div>
                                 <div class="setting-desc">••••••••</div>
                             </div>
-                            </div>
-                            <button class="btn btn-outline btn-small" onclick="changePassword()">Change</button>
                             <button class="btn btn-outline btn-small" onclick="changePassword()">Change</button>
                         </div>
-                        </div>
                     </div>
-                    </div>
-                    
                     
                     <!-- Appearance -->
-                    <!-- Appearance -->
                     <div class="settings-section">
-                    <div class="settings-section">
-                        <h3>🎨 Appearance</h3>
-                        <h3>🎨 Appearance</h3>
+                        <h3><i class="fas fa-palette"></i> Appearance</h3>
                         <div class="settings-item">
-                        <div class="settings-item">
-                            <div class="setting-info">
                             <div class="setting-info">
                                 <div class="setting-label">Theme</div>
-                                <div class="setting-label">Theme</div>
-                                <div class="setting-desc">Choose your preferred theme</div>
                                 <div class="setting-desc">Choose your preferred theme</div>
                             </div>
-                            </div>
-                            <select class="form-select" id="themeSelect">
                             <select class="form-select" id="themeSelect">
                                 <option value="light">Light</option>
-                                <option value="light">Light</option>
-                                <option value="dark">Dark (Coming Soon)</option>
                                 <option value="dark">Dark (Coming Soon)</option>
                                 <option value="auto">Auto (Coming Soon)</option>
-                                <option value="auto">Auto (Coming Soon)</option>
-                            </select>
                             </select>
                         </div>
-                        </div>
                     </div>
-                    </div>
-                    
                     
                     <!-- Notifications -->
-                    <!-- Notifications -->
                     <div class="settings-section">
-                    <div class="settings-section">
-                        <h3>🔔 Notification Preferences</h3>
-                        <h3>🔔 Notification Preferences</h3>
+                        <h3><i class="fas fa-bell"></i> Notification Preferences</h3>
                         <div class="settings-item">
-                        <div class="settings-item">
-                            <div class="setting-info">
                             <div class="setting-info">
                                 <div class="setting-label">Email Notifications</div>
-                                <div class="setting-label">Email Notifications</div>
-                                <div class="setting-desc">Receive updates via email</div>
                                 <div class="setting-desc">Receive updates via email</div>
                             </div>
-                            </div>
-                            <label class="toggle-switch">
                             <label class="toggle-switch">
                                 <input type="checkbox" id="emailNotif" checked>
-                                <input type="checkbox" id="emailNotif" checked>
-                                <span class="toggle-slider"></span>
                                 <span class="toggle-slider"></span>
                             </label>
-                            </label>
-                        </div>
                         </div>
                         <div class="settings-item">
-                        <div class="settings-item">
-                            <div class="setting-info">
                             <div class="setting-info">
                                 <div class="setting-label">Job Applications</div>
-                                <div class="setting-label">Job Applications</div>
-                                <div class="setting-desc">Notify when someone applies to your jobs</div>
                                 <div class="setting-desc">Notify when someone applies to your jobs</div>
                             </div>
-                            </div>
-                            <label class="toggle-switch">
                             <label class="toggle-switch">
                                 <input type="checkbox" id="jobAppNotif" checked>
-                                <input type="checkbox" id="jobAppNotif" checked>
-                                <span class="toggle-slider"></span>
                                 <span class="toggle-slider"></span>
                             </label>
-                            </label>
-                        </div>
                         </div>
                         <div class="settings-item">
-                        <div class="settings-item">
-                            <div class="setting-info">
                             <div class="setting-info">
                                 <div class="setting-label">Payment Updates</div>
-                                <div class="setting-label">Payment Updates</div>
-                                <div class="setting-desc">Notify on coin transactions</div>
                                 <div class="setting-desc">Notify on coin transactions</div>
                             </div>
-                            </div>
-                            <label class="toggle-switch">
                             <label class="toggle-switch">
                                 <input type="checkbox" id="paymentNotif" checked>
-                                <input type="checkbox" id="paymentNotif" checked>
-                                <span class="toggle-slider"></span>
                                 <span class="toggle-slider"></span>
                             </label>
-                            </label>
-                        </div>
                         </div>
                     </div>
-                    </div>
-                    
                     
                     <!-- Language & Region -->
-                    <!-- Language & Region -->
                     <div class="settings-section">
-                    <div class="settings-section">
-                        <h3>🌍 Language & Region</h3>
-                        <h3>🌍 Language & Region</h3>
+                        <h3><i class="fas fa-globe"></i> Language & Region</h3>
                         <div class="settings-item">
-                        <div class="settings-item">
-                            <div class="setting-info">
                             <div class="setting-info">
                                 <div class="setting-label">Language</div>
-                                <div class="setting-label">Language</div>
-                                <div class="setting-desc">Choose your preferred language</div>
                                 <div class="setting-desc">Choose your preferred language</div>
                             </div>
-                            </div>
-                            <select class="form-select" id="languageSelect">
                             <select class="form-select" id="languageSelect">
                                 <option value="en">English</option>
-                                <option value="en">English</option>
-                                <option value="es">Español (Coming Soon)</option>
                                 <option value="es">Español (Coming Soon)</option>
                                 <option value="fr">Français (Coming Soon)</option>
-                                <option value="fr">Français (Coming Soon)</option>
-                                <option value="de">Deutsch (Coming Soon)</option>
                                 <option value="de">Deutsch (Coming Soon)</option>
                             </select>
-                            </select>
-                        </div>
                         </div>
                     </div>
-                    </div>
-                    
                     
                     <!-- Privacy & Security -->
-                    <!-- Privacy & Security -->
                     <div class="settings-section">
-                    <div class="settings-section">
-                        <h3>🔒 Privacy & Security</h3>
-                        <h3>🔒 Privacy & Security</h3>
+                        <h3><i class="fas fa-lock"></i> Privacy & Security</h3>
                         <div class="settings-item">
-                        <div class="settings-item">
-                            <div class="setting-info">
                             <div class="setting-info">
                                 <div class="setting-label">Profile Visibility</div>
-                                <div class="setting-label">Profile Visibility</div>
-                                <div class="setting-desc">Control who can see your profile</div>
                                 <div class="setting-desc">Control who can see your profile</div>
                             </div>
-                            </div>
-                            <select class="form-select" id="privacySelect">
                             <select class="form-select" id="privacySelect">
                                 <option value="public">Public</option>
-                                <option value="public">Public</option>
-                                <option value="private">Private</option>
                                 <option value="private">Private</option>
                             </select>
-                            </select>
-                        </div>
                         </div>
                         <div class="settings-item">
-                        <div class="settings-item">
-                            <div class="setting-info">
                             <div class="setting-info">
                                 <div class="setting-label">Two-Factor Authentication</div>
-                                <div class="setting-label">Two-Factor Authentication</div>
-                                <div class="setting-desc">Add an extra layer of security</div>
                                 <div class="setting-desc">Add an extra layer of security</div>
                             </div>
-                            </div>
-                            <button class="btn btn-outline btn-small" onclick="enable2FA()">Enable</button>
                             <button class="btn btn-outline btn-small" onclick="enable2FA()">Enable</button>
                         </div>
-                        </div>
                     </div>
-                    </div>
-                    
                     
                     <!-- Danger Zone -->
-                    <!-- Danger Zone -->
                     <div class="settings-section danger">
-                    <div class="settings-section danger">
-                        <h3>⚠️ Danger Zone</h3>
-                        <h3>⚠️ Danger Zone</h3>
-                        <div class="settings-item">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Danger Zone</h3>
                         <div class="settings-item">
                             <div class="setting-info">
-                            <div class="setting-info">
-                                <div class="setting-label">Delete Account</div>
                                 <div class="setting-label">Delete Account</div>
                                 <div class="setting-desc">Permanently delete your account and all data</div>
-                                <div class="setting-desc">Permanently delete your account and all data</div>
-                            </div>
                             </div>
                             <button class="btn btn-outline btn-small" style="color: var(--error-color); border-color: var(--error-color);" onclick="deleteAccount()">
-                            <button class="btn btn-outline btn-small" style="color: var(--error-color); border-color: var(--error-color);" onclick="deleteAccount()">
-                                Delete
                                 Delete
                             </button>
-                            </button>
-                        </div>
                         </div>
                     </div>
-                    </div>
-                    
                     
                     <!-- Logout -->
-                    <!-- Logout -->
-                    <div style="margin-top: var(--spacing-xl);">
                     <div style="margin-top: var(--spacing-xl);">
                         <button class="btn btn-secondary btn-large" onclick="handleLogout()">
-                        <button class="btn btn-secondary btn-large" onclick="handleLogout()">
-                            🚪 Logout
-                            🚪 Logout
-                        </button>
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                     </div>
-                    </div>
-                </div>
                 </div>
             </div>
-            </div>
-        </div>
         </div>
         
-        
-        <!-- Bottom Navigation (Mobile) -->
         <!-- Bottom Navigation (Mobile) -->
         <nav class="bottom-nav">
-        <nav class="bottom-nav">
             <a href="dashboard.html" class="bottom-nav-item">
-            <a href="dashboard.html" class="bottom-nav-item">
-                <span class="bottom-nav-icon">📊</span>
-                <span class="bottom-nav-icon">📊</span>
-                <span class="bottom-nav-text">Dashboard</span>
+                <span class="bottom-nav-icon"><i class="fas fa-chart-line"></i></span>
                 <span class="bottom-nav-text">Dashboard</span>
             </a>
-            </a>
             <a href="browse-jobs.html" class="bottom-nav-item">
-            <a href="browse-jobs.html" class="bottom-nav-item">
-                <span class="bottom-nav-icon">💼</span>
-                <span class="bottom-nav-icon">💼</span>
-                <span class="bottom-nav-text">Jobs</span>
+                <span class="bottom-nav-icon"><i class="fas fa-briefcase"></i></span>
                 <span class="bottom-nav-text">Jobs</span>
             </a>
-            </a>
             <a href="post-job.html" class="bottom-nav-item">
-            <a href="post-job.html" class="bottom-nav-item">
-                <span class="bottom-nav-icon">➕</span>
-                <span class="bottom-nav-icon">➕</span>
-                <span class="bottom-nav-text">Post</span>
+                <span class="bottom-nav-icon"><i class="fas fa-plus-circle"></i></span>
                 <span class="bottom-nav-text">Post</span>
             </a>
-            </a>
             <a href="wallet.html" class="bottom-nav-item">
-            <a href="wallet.html" class="bottom-nav-item">
-                <span class="bottom-nav-icon">💰</span>
-                <span class="bottom-nav-icon">💰</span>
-                <span class="bottom-nav-text">Wallet</span>
+                <span class="bottom-nav-icon"><i class="fas fa-coins"></i></span>
                 <span class="bottom-nav-text">Wallet</span>
             </a>
-            </a>
             <a href="profile.html" class="bottom-nav-item">
-            <a href="profile.html" class="bottom-nav-item">
-                <span class="bottom-nav-icon">👤</span>
-                <span class="bottom-nav-icon">👤</span>
-                <span class="bottom-nav-text">Profile</span>
+                <span class="bottom-nav-icon"><i class="fas fa-user"></i></span>
                 <span class="bottom-nav-text">Profile</span>
             </a>
-            </a>
-        </nav>
         </nav>
     </div>
-    </div>
-    
-    
     
     <!-- Mock Auth System -->
     

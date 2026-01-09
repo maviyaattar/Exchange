@@ -1,318 +1,164 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
 <html lang="en">
 <head>
-<head>
-    <meta charset="UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chat - Skill Exchange</title>
     <title>chat - Skill Exchange</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/chat.css">
     <link rel="stylesheet" href="../css/chat.css">
 </head>
-</head>
-<body>
 <body>
     <div class="app-container">
-    <div class="app-container">
-        <!-- Sidebar Navigation -->
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
-        <aside class="sidebar" id="sidebar">
             <div class="logo">
-            <div class="logo">
-                <span class="logo-icon">💰</span> WorkCoin
-                <span class="logo-icon">💰</span> WorkCoin
-            </div>
+                <span class="logo-icon"><i class="fas fa-coins"></i></span> WorkCoin
             </div>
             <nav class="nav-menu">
-            <nav class="nav-menu">
                 <a href="dashboard.html" class="nav-item">
-                <a href="dashboard.html" class="nav-item">
-                    <span class="nav-icon">📊</span>
-                    <span class="nav-icon">📊</span>
-                    <span class="nav-text">Dashboard</span>
+                    <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
                     <span class="nav-text">Dashboard</span>
                 </a>
-                </a>
                 <a href="browse-jobs.html" class="nav-item">
-                <a href="browse-jobs.html" class="nav-item">
-                    <span class="nav-icon">💼</span>
-                    <span class="nav-icon">💼</span>
-                    <span class="nav-text">Browse Jobs</span>
+                    <span class="nav-icon"><i class="fas fa-briefcase"></i></span>
                     <span class="nav-text">Browse Jobs</span>
                 </a>
-                </a>
                 <a href="my-jobs.html" class="nav-item">
-                <a href="my-jobs.html" class="nav-item">
-                    <span class="nav-icon">📋</span>
-                    <span class="nav-icon">📋</span>
-                    <span class="nav-text">My Jobs</span>
+                    <span class="nav-icon"><i class="fas fa-tasks"></i></span>
                     <span class="nav-text">My Jobs</span>
                 </a>
-                </a>
                 <a href="post-job.html" class="nav-item">
-                <a href="post-job.html" class="nav-item">
-                    <span class="nav-icon">➕</span>
-                    <span class="nav-icon">➕</span>
-                    <span class="nav-text">Post Job</span>
+                    <span class="nav-icon"><i class="fas fa-plus-circle"></i></span>
                     <span class="nav-text">Post Job</span>
                 </a>
-                </a>
                 <a href="wallet.html" class="nav-item">
-                <a href="wallet.html" class="nav-item">
-                    <span class="nav-icon">💰</span>
-                    <span class="nav-icon">💰</span>
-                    <span class="nav-text">Wallet</span>
+                    <span class="nav-icon"><i class="fas fa-coins"></i></span>
                     <span class="nav-text">Wallet</span>
                 </a>
-                </a>
                 <a href="chat.html" class="nav-item active">
-                <a href="chat.html" class="nav-item active">
-                    <span class="nav-icon">💬</span>
-                    <span class="nav-icon">💬</span>
-                    <span class="nav-text">Messages</span>
+                    <span class="nav-icon"><i class="fas fa-comments"></i></span>
                     <span class="nav-text">Messages</span>
                 </a>
-                </a>
                 <a href="notifications.html" class="nav-item">
-                <a href="notifications.html" class="nav-item">
-                    <span class="nav-icon">🔔</span>
-                    <span class="nav-icon">🔔</span>
-                    <span class="nav-text">Notifications</span>
+                    <span class="nav-icon"><i class="fas fa-bell"></i></span>
                     <span class="nav-text">Notifications</span>
                 </a>
-                </a>
                 <a href="profile.html" class="nav-item">
-                <a href="profile.html" class="nav-item">
-                    <span class="nav-icon">👤</span>
-                    <span class="nav-icon">👤</span>
-                    <span class="nav-text">Profile</span>
+                    <span class="nav-icon"><i class="fas fa-user"></i></span>
                     <span class="nav-text">Profile</span>
                 </a>
-                </a>
                 <a href="settings.html" class="nav-item">
-                <a href="settings.html" class="nav-item">
-                    <span class="nav-icon">⚙️</span>
-                    <span class="nav-icon">⚙️</span>
-                    <span class="nav-text">Settings</span>
+                    <span class="nav-icon"><i class="fas fa-cog"></i></span>
                     <span class="nav-text">Settings</span>
                 </a>
-                </a>
-            </nav>
             </nav>
         </aside>
-        </aside>
-
 
         <!-- Main Content -->
-        <!-- Main Content -->
-        <div class="main-content">
         <div class="main-content">
             <header class="header">
-            <header class="header">
-                <button class="menu-toggle" id="menuToggle">☰</button>
-                <button class="menu-toggle" id="menuToggle">☰</button>
-                <h1>Messages</h1>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <h1>Messages</h1>
                 <div class="header-actions">
-                <div class="header-actions">
                     <div class="coins-display">
-                    <div class="coins-display">
-                        <span class="coin-icon">💰</span>
-                        <span class="coin-icon">💰</span>
-                        <span class="coin-amount" id="headerCoins">0</span>
+                        <span class="coin-icon"><i class="fas fa-coins"></i></span>
                         <span class="coin-amount" id="headerCoins">0</span>
                     </div>
-                    </div>
                     <div class="user-menu">
-                    <div class="user-menu">
-                        <div class="user-avatar" id="userAvatar">👤</div>
-                        <div class="user-avatar" id="userAvatar">👤</div>
-                        <span class="user-name" id="userName">User</span>
+                        <div class="user-avatar" id="userAvatar"><i class="fas fa-user"></i></div>
                         <span class="user-name" id="userName">User</span>
                     </div>
-                    </div>
-                </div>
                 </div>
             </header>
-            </header>
-
 
             <main class="content">
-            <main class="content">
-                <div class="chat-container">
                 <div class="chat-container">
                     <!-- Conversations List -->
-                    <!-- Conversations List -->
-                    <div class="conversations-panel">
                     <div class="conversations-panel">
                         <div class="conversations-header">
-                        <div class="conversations-header">
-                            <h2>Conversations</h2>
                             <h2>Conversations</h2>
                             <input type="text" id="searchConversations" class="search-input" placeholder="Search conversations...">
-                            <input type="text" id="searchConversations" class="search-input" placeholder="Search conversations...">
-                        </div>
                         </div>
                         <div class="conversations-list" id="conversationsList">
-                        <div class="conversations-list" id="conversationsList">
-                            <!-- Conversations will be loaded here -->
                             <!-- Conversations will be loaded here -->
                         </div>
-                        </div>
                     </div>
-                    </div>
-
 
                     <!-- Chat Panel -->
-                    <!-- Chat Panel -->
-                    <div class="chat-panel" id="chatPanel">
                     <div class="chat-panel" id="chatPanel">
                         <div class="chat-header" id="chatHeader">
-                        <div class="chat-header" id="chatHeader">
                             <div class="chat-user-info">
-                            <div class="chat-user-info">
-                                <div class="chat-avatar">👤</div>
-                                <div class="chat-avatar">👤</div>
-                                <div class="chat-user-details">
+                                <div class="chat-avatar"><i class="fas fa-user"></i></div>
                                 <div class="chat-user-details">
                                     <h3 id="chatUserName">Select a conversation</h3>
-                                    <h3 id="chatUserName">Select a conversation</h3>
-                                    <span id="chatJobTitle" class="chat-job-title"></span>
                                     <span id="chatJobTitle" class="chat-job-title"></span>
                                 </div>
-                                </div>
-                            </div>
                             </div>
                             <div class="chat-actions">
-                            <div class="chat-actions">
                                 <button class="btn-icon" id="viewJobBtn" style="display: none;">
-                                <button class="btn-icon" id="viewJobBtn" style="display: none;">
-                                    📋 View Job
-                                    📋 View Job
-                                </button>
+                                    <i class="fas fa-tasks"></i> View Job
                                 </button>
                                 <button class="btn-icon" id="approveWorkBtn" style="display: none;">
-                                <button class="btn-icon" id="approveWorkBtn" style="display: none;">
-                                    ✅ Approve Work
-                                    ✅ Approve Work
-                                </button>
+                                    <i class="fas fa-check-circle"></i> Approve Work
                                 </button>
                             </div>
-                            </div>
                         </div>
-                        </div>
-
 
                         <div class="chat-messages" id="chatMessages">
-                        <div class="chat-messages" id="chatMessages">
                             <div class="empty-chat">
-                            <div class="empty-chat">
-                                <span class="empty-icon">💬</span>
-                                <span class="empty-icon">💬</span>
-                                <p>Select a conversation to start messaging</p>
+                                <span class="empty-icon"><i class="fas fa-comments"></i></span>
                                 <p>Select a conversation to start messaging</p>
                             </div>
-                            </div>
                         </div>
-                        </div>
-
 
                         <div class="chat-input-container" id="chatInputContainer" style="display: none;">
-                        <div class="chat-input-container" id="chatInputContainer" style="display: none;">
-                            <div class="file-upload-area" id="fileUploadArea">
                             <div class="file-upload-area" id="fileUploadArea">
                                 <input type="file" id="fileInput" multiple style="display: none;">
-                                <input type="file" id="fileInput" multiple style="display: none;">
-                                <button class="btn-icon" id="uploadBtn">📎</button>
-                                <button class="btn-icon" id="uploadBtn">📎</button>
-                                <div id="filePreview" class="file-preview"></div>
+                                <button class="btn-icon" id="uploadBtn"><i class="fas fa-paperclip"></i></button>
                                 <div id="filePreview" class="file-preview"></div>
                             </div>
-                            </div>
-                            <div class="chat-input-wrapper">
                             <div class="chat-input-wrapper">
                                 <textarea id="messageInput" class="chat-input" placeholder="Type your message..." rows="1"></textarea>
-                                <textarea id="messageInput" class="chat-input" placeholder="Type your message..." rows="1"></textarea>
                                 <button id="sendMessageBtn" class="btn btn-primary">
-                                <button id="sendMessageBtn" class="btn btn-primary">
-                                    <span>Send</span> 📤
-                                    <span>Send</span> 📤
-                                </button>
+                                    <span>Send</span> <i class="fas fa-paper-plane"></i>
                                 </button>
                             </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
-                    </div>
-                </div>
                 </div>
             </main>
-            </main>
-        </div>
         </div>
 
-
-        <!-- Bottom Navigation (Mobile) -->
         <!-- Bottom Navigation (Mobile) -->
         <nav class="bottom-nav" id="bottomNav">
-        <nav class="bottom-nav" id="bottomNav">
             <a href="dashboard.html" class="nav-item">
-            <a href="dashboard.html" class="nav-item">
-                <span class="nav-icon">📊</span>
-                <span class="nav-icon">📊</span>
-                <span class="nav-text">Dashboard</span>
+                <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
                 <span class="nav-text">Dashboard</span>
             </a>
-            </a>
             <a href="browse-jobs.html" class="nav-item">
-            <a href="browse-jobs.html" class="nav-item">
-                <span class="nav-icon">💼</span>
-                <span class="nav-icon">💼</span>
-                <span class="nav-text">Jobs</span>
+                <span class="nav-icon"><i class="fas fa-briefcase"></i></span>
                 <span class="nav-text">Jobs</span>
             </a>
-            </a>
             <a href="post-job.html" class="nav-item">
-            <a href="post-job.html" class="nav-item">
-                <span class="nav-icon">➕</span>
-                <span class="nav-icon">➕</span>
-                <span class="nav-text">Post</span>
+                <span class="nav-icon"><i class="fas fa-plus-circle"></i></span>
                 <span class="nav-text">Post</span>
             </a>
-            </a>
             <a href="chat.html" class="nav-item active">
-            <a href="chat.html" class="nav-item active">
-                <span class="nav-icon">💬</span>
-                <span class="nav-icon">💬</span>
-                <span class="nav-text">Chat</span>
+                <span class="nav-icon"><i class="fas fa-comments"></i></span>
                 <span class="nav-text">Chat</span>
             </a>
-            </a>
             <a href="profile.html" class="nav-item">
-            <a href="profile.html" class="nav-item">
-                <span class="nav-icon">👤</span>
-                <span class="nav-icon">👤</span>
-                <span class="nav-text">Profile</span>
+                <span class="nav-icon"><i class="fas fa-user"></i></span>
                 <span class="nav-text">Profile</span>
             </a>
-            </a>
-        </nav>
         </nav>
     </div>
-    </div>
-
 
     
     <!-- Mock Auth System -->
