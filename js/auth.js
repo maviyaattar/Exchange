@@ -1,4 +1,4 @@
-// Authentication Logic with Firebase
+// Authentication Logic with Mock Auth System
 
 // Helper function to show loading state
 function showLoading(button) {
@@ -94,79 +94,52 @@ function showSuccess(message) {
     showAlert('Success', message, 'success');
 }
 
-// Create user profile in Firestore
+// Create user profile
 async function createUserProfile(user, additionalData = {}) {
-    const db = getFirestore();
-    const userRef = db.collection('users').doc(user.uid);
-    
-    // Check if profile already exists
-    try {
-        const existingProfile = await userRef.get();
-        if (existingProfile.exists) {
-            return existingProfile.data();
-        }
-    } catch (error) {
-        console.log('Checking existing profile:', error);
-    }
-    
+    // In mock system, user profile is already created
     const userData = {
         uid: user.uid,
         email: user.email,
-        name: additionalData.name || user.displayName || user.email.split('@')[0],
-        role: additionalData.role || 'worker', // Default to worker role
-        coins: additionalData.coins || 0, // Starting coins (can be overridden for special cases like guest users)
+        name: additionalData.name || user.name || user.email.split('@')[0],
+        role: additionalData.role || 'worker',
+        coins: additionalData.coins !== undefined ? additionalData.coins : user.coins || 100,
         lockedCoins: 0,
         earnedCoins: 0,
         rating: 0,
         completedJobs: 0,
         activeJobs: 0,
         photoURL: user.photoURL || null,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
     };
     
-    try {
-        await userRef.set(userData);
-        return userData;
-    } catch (error) {
-        showError('Failed to create user profile', error.message);
-        throw error;
-    }
+    return userData;
 }
 
-// Get user profile from Firestore
+// Get user profile
 async function getUserProfile(uid) {
-    const db = getFirestore();
-    try {
-        const userDoc = await db.collection('users').doc(uid).get();
-        if (userDoc.exists) {
-            return userDoc.data();
-        }
-        return null;
-    } catch (error) {
-        showError('Failed to get user profile', error.message);
-        throw error;
-    }
+    const user = getUserById(uid);
+    return user || null;
 }
 
 // Save user data to localStorage (for quick access)
 function saveUserData(userData) {
-    localStorage.setItem('workcoin_user', JSON.stringify(userData));
-    localStorage.setItem('workcoin_logged_in', 'true');
+    localStorage.setItem('skillexchange_user', JSON.stringify(userData));
+    localStorage.setItem('skillexchange_logged_in', 'true');
 }
 
 function getUserData() {
-    const userData = localStorage.getItem('workcoin_user');
+    const userData = localStorage.getItem('skillexchange_user');
     return userData ? JSON.parse(userData) : null;
 }
 
 function isLoggedIn() {
-    return localStorage.getItem('workcoin_logged_in') === 'true';
+    return localStorage.getItem('skillexchange_logged_in') === 'true';
 }
 
 function clearUserData() {
-    localStorage.removeItem('workcoin_user');
-    localStorage.removeItem('workcoin_logged_in');
+    localStorage.removeItem('skillexchange_user');
+    localStorage.removeItem('skillexchange_logged_in');
 }
 
 async function logout() {
@@ -187,10 +160,7 @@ function setupAuthStateObserver() {
         if (user) {
             // User is signed in
             console.log('User signed in:', user.email);
-            const userData = await getUserProfile(user.uid);
-            if (userData) {
-                saveUserData(userData);
-            }
+            saveUserData(user);
         } else {
             // User is signed out
             console.log('User signed out');
@@ -286,15 +256,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 const user = userCredential.user;
                 
                 // Update display name
-                await user.updateProfile({
+                const auth = getAuth();
+                await auth.updateProfile({
                     displayName: name
                 });
                 
-                // Create user profile in Firestore
+                // Create user profile
                 const userData = await createUserProfile(user, { name, role });
                 
                 saveUserData(userData);
-                showSuccess('Welcome to WorkCoin! Your account has been created successfully.');
+                showSuccess('Welcome to Skill Exchange! Your account has been created successfully.');
                 
                 // Redirect after a short delay to show success message
                 setTimeout(() => {
@@ -343,12 +314,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     coins: 500 // Give guest some starting coins
                 });
                 
-                // Update the profile with starting coins
-                const db = getFirestore();
-                await db.collection('users').doc(user.uid).update({
-                    coins: 500
-                });
-                
                 saveUserData(userData);
                 showSuccess('Welcome! You are signed in as a guest.');
                 
@@ -359,69 +324,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 hideLoading(guestBtn);
                 showError('Guest Login Failed', error.message || 'Failed to continue as guest. Please try again.');
-            }
-        });
-    }
-    
-    // Google Sign-In Button Handler
-    const googleSignInBtn = document.getElementById('googleSignInBtn');
-    if (googleSignInBtn) {
-        googleSignInBtn.addEventListener('click', async function() {
-            showLoading(googleSignInBtn);
-            
-            try {
-                const auth = getAuth();
-                // Using Firebase v9 compat API for GoogleAuthProvider
-                const provider = new firebase.auth.GoogleAuthProvider();
-                
-                // Request additional scopes if needed
-                provider.addScope('profile');
-                provider.addScope('email');
-                
-                const result = await auth.signInWithPopup(provider);
-                const user = result.user;
-                
-                // Create or get user profile
-                const userData = await createUserProfile(user, {
-                    name: user.displayName,
-                    role: 'worker'
-                });
-                
-                saveUserData(userData);
-                
-                // Check if this is a new user
-                const isNewUser = result.additionalUserInfo?.isNewUser;
-                if (isNewUser) {
-                    showSuccess('Welcome to WorkCoin! Your account has been created successfully.');
-                } else {
-                    showSuccess('Welcome back!');
-                }
-                
-                // Redirect after a short delay
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1500);
-            } catch (error) {
-                hideLoading(googleSignInBtn);
-                
-                let errorTitle = 'Google Sign-In Failed';
-                let errorMessage = '';
-                
-                if (error.code === 'auth/popup-closed-by-user') {
-                    errorMessage = 'Sign-in popup was closed. Please try again.';
-                } else if (error.code === 'auth/popup-blocked') {
-                    errorMessage = 'Sign-in popup was blocked by your browser. Please allow popups and try again.';
-                } else if (error.code === 'auth/cancelled-popup-request') {
-                    errorMessage = 'Sign-in was cancelled. Please try again.';
-                } else if (error.code === 'auth/account-exists-with-different-credential') {
-                    errorMessage = 'An account already exists with the same email but different sign-in method. Please use your original sign-in method.';
-                } else if (error.code === 'auth/network-request-failed') {
-                    errorMessage = 'Network error. Please check your connection.';
-                } else {
-                    errorMessage = error.message || 'An unexpected error occurred. Please try again.';
-                }
-                
-                showError(errorTitle, errorMessage);
             }
         });
     }

@@ -1,8 +1,9 @@
-// Dummy Data for the Application
+// Mock Data for the Application (replaces Firebase backend)
 
-const DUMMY_DATA = {
+const MOCK_DATA = {
     // Current User (will be overridden by localStorage)
     currentUser: {
+        uid: 'user1',
         id: 1,
         name: 'John Doe',
         email: 'john@example.com',
@@ -14,8 +15,45 @@ const DUMMY_DATA = {
         rating: 4.5,
         skills: ['Web Development', 'JavaScript', 'React', 'CSS'],
         completedJobs: 15,
-        activeJobs: 3
+        activeJobs: 3,
+        photoURL: null
     },
+    
+    // Mock users database for authentication
+    users: [
+        {
+            uid: 'user1',
+            email: 'john@example.com',
+            password: 'password123',
+            name: 'John Doe',
+            role: 'worker',
+            avatar: '👤',
+            coins: 1250,
+            lockedCoins: 500,
+            earnedCoins: 2000,
+            rating: 4.5,
+            skills: ['Web Development', 'JavaScript', 'React', 'CSS'],
+            completedJobs: 15,
+            activeJobs: 3,
+            photoURL: null
+        },
+        {
+            uid: 'user2',
+            email: 'demo@example.com',
+            password: 'demo123',
+            name: 'Demo User',
+            role: 'worker',
+            avatar: '👤',
+            coins: 500,
+            lockedCoins: 0,
+            earnedCoins: 0,
+            rating: 0,
+            skills: [],
+            completedJobs: 0,
+            activeJobs: 0,
+            photoURL: null
+        }
+    ],
     
     // Jobs Database
     jobs: [
@@ -251,47 +289,161 @@ const DUMMY_DATA = {
     ]
 };
 
+// Chat conversations mock data
+const MOCK_CONVERSATIONS = [
+    {
+        id: 'conv1',
+        otherUser: {
+            name: 'Sarah Johnson',
+            avatar: '👩',
+            email: 'sarah@example.com'
+        },
+        job: {
+            id: 1,
+            title: 'Build Responsive Landing Page',
+            coins: 500
+        },
+        lastMessage: {
+            text: "I've uploaded the final design files",
+            time: new Date().getTime() - 300000,
+            sender: 'sarah@example.com'
+        },
+        unread: 2,
+        messages: [
+            {
+                id: 'msg1',
+                text: 'Hi! I saw your job posting for the landing page. I have 5 years of experience in frontend development.',
+                sender: 'john@example.com',
+                timestamp: new Date().getTime() - 86400000,
+                read: true
+            },
+            {
+                id: 'msg2',
+                text: "That's great! Could you share some examples of your previous work?",
+                sender: 'sarah@example.com',
+                timestamp: new Date().getTime() - 82800000,
+                read: true
+            },
+            {
+                id: 'msg3',
+                text: "I've uploaded the final design files",
+                sender: 'sarah@example.com',
+                timestamp: new Date().getTime() - 300000,
+                read: false
+            }
+        ]
+    },
+    {
+        id: 'conv2',
+        otherUser: {
+            name: 'Mike Chen',
+            avatar: '👨',
+            email: 'mike@example.com'
+        },
+        job: {
+            id: 2,
+            title: 'Logo Design for Tech Company',
+            coins: 350
+        },
+        lastMessage: {
+            text: 'When do you need this completed?',
+            time: new Date().getTime() - 3600000,
+            sender: 'mike@example.com'
+        },
+        unread: 0,
+        messages: [
+            {
+                id: 'msg1',
+                text: 'Hello! I am interested in your logo design project.',
+                sender: 'john@example.com',
+                timestamp: new Date().getTime() - 7200000,
+                read: true
+            },
+            {
+                id: 'msg2',
+                text: 'When do you need this completed?',
+                sender: 'mike@example.com',
+                timestamp: new Date().getTime() - 3600000,
+                read: true
+            }
+        ]
+    }
+];
+
 // Helper Functions
 function getCurrentUser() {
-    const storedUser = localStorage.getItem('workcoin_user');
-    return storedUser ? JSON.parse(storedUser) : DUMMY_DATA.currentUser;
+    const storedUser = localStorage.getItem('skillexchange_user');
+    return storedUser ? JSON.parse(storedUser) : null;
 }
 
 function updateUserCoins(amount) {
     const user = getCurrentUser();
-    user.coins += amount;
-    localStorage.setItem('workcoin_user', JSON.stringify(user));
+    if (user) {
+        user.coins += amount;
+        localStorage.setItem('skillexchange_user', JSON.stringify(user));
+    }
 }
 
 function getAllJobs() {
-    return DUMMY_DATA.jobs;
+    return MOCK_DATA.jobs;
 }
 
 function getJobById(id) {
-    return DUMMY_DATA.jobs.find(job => job.id === parseInt(id));
+    return MOCK_DATA.jobs.find(job => job.id === parseInt(id));
 }
 
 function getMyActiveJobs() {
-    return DUMMY_DATA.myActiveJobs;
+    return MOCK_DATA.myActiveJobs;
 }
 
 function getMyPostedJobs() {
-    return DUMMY_DATA.myPostedJobs;
+    return MOCK_DATA.myPostedJobs;
 }
 
 function getTransactions() {
-    return DUMMY_DATA.transactions;
+    return MOCK_DATA.transactions;
 }
 
 function getNotifications() {
-    return DUMMY_DATA.notifications;
+    return MOCK_DATA.notifications;
 }
 
 function getUnreadNotificationsCount() {
-    return DUMMY_DATA.notifications.filter(n => !n.read).length;
+    return MOCK_DATA.notifications.filter(n => !n.read).length;
+}
+
+function getChatConversations() {
+    return MOCK_CONVERSATIONS;
+}
+
+function getConversationById(id) {
+    return MOCK_CONVERSATIONS.find(conv => conv.id === id);
+}
+
+// Mock user lookup
+function getUserByEmail(email) {
+    return MOCK_DATA.users.find(user => user.email === email);
+}
+
+function getUserById(uid) {
+    return MOCK_DATA.users.find(user => user.uid === uid);
 }
 
 // Export for use in other files
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = DUMMY_DATA;
+if (typeof window !== 'undefined') {
+    window.MOCK_DATA = MOCK_DATA;
+    window.MOCK_CONVERSATIONS = MOCK_CONVERSATIONS;
+    window.getCurrentUser = getCurrentUser;
+    window.updateUserCoins = updateUserCoins;
+    window.getAllJobs = getAllJobs;
+    window.getJobById = getJobById;
+    window.getMyActiveJobs = getMyActiveJobs;
+    window.getMyPostedJobs = getMyPostedJobs;
+    window.getTransactions = getTransactions;
+    window.getNotifications = getNotifications;
+    window.getUnreadNotificationsCount = getUnreadNotificationsCount;
+    window.getChatConversations = getChatConversations;
+    window.getConversationById = getConversationById;
+    window.getUserByEmail = getUserByEmail;
+    window.getUserById = getUserById;
 }
