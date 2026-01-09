@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - WorkCoin</title>
+    <title>Register - Skill Exchange</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/auth.css">
@@ -12,9 +12,9 @@
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">
-                <div class="logo"><i class="fas fa-coins"></i> WorkCoin</div>
+                <div class="logo"><i class="fas fa-exchange-alt"></i> Skill Exchange</div>
                 <h1>Create Account</h1>
-                <p>Join WorkCoin and start your journey</p>
+                <p>Join Skill Exchange and start your journey</p>
             </div>
             
             <form class="auth-form" id="registerForm">
@@ -58,19 +58,11 @@
                 <div class="form-group">
                     <label class="checkbox-label">
                         <input type="checkbox" id="terms" required>
-                        <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+                        <span>I agree to the <a href="terms-and-conditions.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a></span>
                     </label>
                 </div>
                 
                 <button type="submit" class="btn btn-primary btn-block">Create Account</button>
-                
-                <div class="divider">
-                    <span>OR</span>
-                </div>
-                
-                <button type="button" class="btn btn-outline btn-block" id="googleSignInBtn">
-                    <i class="fab fa-google"></i> Continue with Google
-                </button>
             </form>
             
             <div class="auth-footer">
@@ -79,15 +71,9 @@
         </div>
     </div>
     
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
-    
-    <!-- Firebase Initialization -->
-    <script src="../js/firebase-init.js"></script>
+    <!-- Mock Auth System -->
     <script src="../js/data.js"></script>
+    <script src="../js/mock-auth.js"></script>
     <script src="../js/auth.js"></script>
 </body>
 </html>

@@ -1,165 +1,312 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
 <html lang="en">
 <head>
+<head>
+    <meta charset="UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse Jobs - WorkCoin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>browse-jobs - Skill Exchange</title>
+    <title>browse-jobs - Skill Exchange</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/jobs.css">
+    <link rel="stylesheet" href="../css/jobs.css">
+</head>
 </head>
 <body>
+<body>
+    <div class="app-layout">
     <div class="app-layout">
         <!-- Sidebar Navigation (Desktop) -->
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside class="sidebar" id="sidebar">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="logo">💰 WorkCoin</div>
+            <div class="sidebar-header">
+                <div class="logo">💰 Skill Exchange</div>
+                <div class="logo">💰 Skill Exchange</div>
+            </div>
             </div>
             <nav class="sidebar-nav">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
                 <a href="dashboard.html" class="nav-item">
                     <span class="nav-icon">📊</span>
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
                     <span class="nav-text">Dashboard</span>
                 </a>
+                </a>
+                <a href="browse-jobs.html" class="nav-item active">
                 <a href="browse-jobs.html" class="nav-item active">
                     <span class="nav-icon">💼</span>
+                    <span class="nav-icon">💼</span>
+                    <span class="nav-text">Browse Jobs</span>
                     <span class="nav-text">Browse Jobs</span>
                 </a>
+                </a>
+                <a href="my-jobs.html" class="nav-item">
                 <a href="my-jobs.html" class="nav-item">
                     <span class="nav-icon">📋</span>
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">My Jobs</span>
                     <span class="nav-text">My Jobs</span>
                 </a>
+                </a>
+                <a href="post-job.html" class="nav-item">
                 <a href="post-job.html" class="nav-item">
                     <span class="nav-icon">➕</span>
+                    <span class="nav-icon">➕</span>
+                    <span class="nav-text">Post Job</span>
                     <span class="nav-text">Post Job</span>
                 </a>
+                </a>
+                <a href="wallet.html" class="nav-item">
                 <a href="wallet.html" class="nav-item">
                     <span class="nav-icon">💰</span>
+                    <span class="nav-icon">💰</span>
+                    <span class="nav-text">Wallet</span>
                     <span class="nav-text">Wallet</span>
                 </a>
+                </a>
+                <a href="notifications.html" class="nav-item">
                 <a href="notifications.html" class="nav-item">
                     <span class="nav-icon">🔔</span>
+                    <span class="nav-icon">🔔</span>
+                    <span class="nav-text">Notifications</span>
                     <span class="nav-text">Notifications</span>
                 </a>
+                </a>
+                <a href="profile.html" class="nav-item">
                 <a href="profile.html" class="nav-item">
                     <span class="nav-icon">👤</span>
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">Profile</span>
                     <span class="nav-text">Profile</span>
                 </a>
+                </a>
+                <a href="settings.html" class="nav-item">
                 <a href="settings.html" class="nav-item">
                     <span class="nav-icon">⚙️</span>
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Settings</span>
                     <span class="nav-text">Settings</span>
                 </a>
+                </a>
+            </nav>
             </nav>
         </aside>
+        </aside>
+        
         
         <!-- Main Content -->
+        <!-- Main Content -->
+        <div class="main-content">
         <div class="main-content">
             <!-- Top Header -->
+            <!-- Top Header -->
             <header class="top-header">
+            <header class="top-header">
+                <button class="menu-toggle" id="menuToggle">
                 <button class="menu-toggle" id="menuToggle">
                     <span></span>
                     <span></span>
                     <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 </button>
                 <div class="header-title">
+                <div class="header-title">
+                    <h1>Browse Jobs</h1>
                     <h1>Browse Jobs</h1>
                 </div>
+                </div>
+                <div class="header-actions">
                 <div class="header-actions">
                     <div class="coin-display">
+                    <div class="coin-display">
+                        <span class="coin-icon">💰</span>
                         <span class="coin-icon">💰</span>
                         <span class="coin-amount" id="headerCoins">0</span>
+                        <span class="coin-amount" id="headerCoins">0</span>
+                    </div>
                     </div>
                     <div class="user-menu">
+                    <div class="user-menu">
+                        <div class="user-avatar" id="userAvatar">👤</div>
                         <div class="user-avatar" id="userAvatar">👤</div>
                         <span class="user-name" id="userName">User</span>
+                        <span class="user-name" id="userName">User</span>
                     </div>
+                    </div>
+                </div>
                 </div>
             </header>
+            </header>
+            
             
             <!-- Browse Jobs Content -->
+            <!-- Browse Jobs Content -->
+            <div class="content-wrapper">
             <div class="content-wrapper">
                 <!-- Search and Filters -->
+                <!-- Search and Filters -->
+                <div class="search-section">
                 <div class="search-section">
                     <div class="search-bar">
+                    <div class="search-bar">
+                        <input 
                         <input 
                             type="text" 
+                            type="text" 
+                            id="searchInput" 
                             id="searchInput" 
                             class="search-input" 
+                            class="search-input" 
+                            placeholder="Search jobs by title, description, or category..."
                             placeholder="Search jobs by title, description, or category..."
                         >
+                        >
+                        <button class="btn btn-primary" id="searchBtn">🔍 Search</button>
                         <button class="btn btn-primary" id="searchBtn">🔍 Search</button>
                     </div>
+                    </div>
+                    
                     
                     <div class="filters-section">
+                    <div class="filters-section">
+                        <div class="category-filters" id="categoryFilters">
                         <div class="category-filters" id="categoryFilters">
                             <button class="filter-btn active" data-category="all">All</button>
+                            <button class="filter-btn active" data-category="all">All</button>
+                            <button class="filter-btn" data-category="Web Development">💻 Web Dev</button>
                             <button class="filter-btn" data-category="Web Development">💻 Web Dev</button>
                             <button class="filter-btn" data-category="Design">🎨 Design</button>
+                            <button class="filter-btn" data-category="Design">🎨 Design</button>
+                            <button class="filter-btn" data-category="Writing">✍️ Writing</button>
                             <button class="filter-btn" data-category="Writing">✍️ Writing</button>
                             <button class="filter-btn" data-category="Mobile Apps">📱 Mobile</button>
+                            <button class="filter-btn" data-category="Mobile Apps">📱 Mobile</button>
+                            <button class="filter-btn" data-category="Data Analysis">📊 Data</button>
                             <button class="filter-btn" data-category="Data Analysis">📊 Data</button>
                             <button class="filter-btn" data-category="Video Editing">🎬 Video</button>
+                            <button class="filter-btn" data-category="Video Editing">🎬 Video</button>
+                        </div>
                         </div>
                         
+                        
+                        <div class="sort-filter">
                         <div class="sort-filter">
                             <label for="sortSelect">Sort by:</label>
+                            <label for="sortSelect">Sort by:</label>
+                            <select id="sortSelect" class="form-select">
                             <select id="sortSelect" class="form-select">
                                 <option value="newest">Newest First</option>
+                                <option value="newest">Newest First</option>
+                                <option value="coins_high">Highest Coins</option>
                                 <option value="coins_high">Highest Coins</option>
                                 <option value="coins_low">Lowest Coins</option>
+                                <option value="coins_low">Lowest Coins</option>
+                                <option value="deadline">Deadline (Soon)</option>
                                 <option value="deadline">Deadline (Soon)</option>
                             </select>
+                            </select>
+                        </div>
                         </div>
                     </div>
+                    </div>
                 </div>
+                </div>
+                
                 
                 <!-- Jobs Count -->
+                <!-- Jobs Count -->
+                <div class="jobs-header">
                 <div class="jobs-header">
                     <h3><span id="jobsCount">0</span> Jobs Available</h3>
+                    <h3><span id="jobsCount">0</span> Jobs Available</h3>
+                </div>
                 </div>
                 
+                
+                <!-- Jobs List -->
                 <!-- Jobs List -->
                 <div class="jobs-list" id="jobsList">
+                <div class="jobs-list" id="jobsList">
+                    <!-- Job cards will be populated by JavaScript -->
                     <!-- Job cards will be populated by JavaScript -->
                 </div>
+                </div>
+            </div>
             </div>
         </div>
+        </div>
+        
         
         <!-- Bottom Navigation (Mobile) -->
+        <!-- Bottom Navigation (Mobile) -->
+        <nav class="bottom-nav">
         <nav class="bottom-nav">
             <a href="dashboard.html" class="bottom-nav-item">
+            <a href="dashboard.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">📊</span>
                 <span class="bottom-nav-icon">📊</span>
                 <span class="bottom-nav-text">Dashboard</span>
+                <span class="bottom-nav-text">Dashboard</span>
+            </a>
             </a>
             <a href="browse-jobs.html" class="bottom-nav-item active">
+            <a href="browse-jobs.html" class="bottom-nav-item active">
+                <span class="bottom-nav-icon">💼</span>
                 <span class="bottom-nav-icon">💼</span>
                 <span class="bottom-nav-text">Jobs</span>
+                <span class="bottom-nav-text">Jobs</span>
+            </a>
             </a>
             <a href="post-job.html" class="bottom-nav-item">
+            <a href="post-job.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">➕</span>
                 <span class="bottom-nav-icon">➕</span>
                 <span class="bottom-nav-text">Post</span>
+                <span class="bottom-nav-text">Post</span>
+            </a>
             </a>
             <a href="wallet.html" class="bottom-nav-item">
+            <a href="wallet.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">💰</span>
                 <span class="bottom-nav-icon">💰</span>
                 <span class="bottom-nav-text">Wallet</span>
+                <span class="bottom-nav-text">Wallet</span>
+            </a>
             </a>
             <a href="profile.html" class="bottom-nav-item">
+            <a href="profile.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">👤</span>
                 <span class="bottom-nav-icon">👤</span>
                 <span class="bottom-nav-text">Profile</span>
+                <span class="bottom-nav-text">Profile</span>
+            </a>
             </a>
         </nav>
+        </nav>
+    </div>
     </div>
     
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
     
-    <!-- Firebase Initialization -->
-    <script src="../js/firebase-init.js"></script>
+    
+    <!-- Mock Auth System -->
+    <!-- Mock Auth System -->
     <script src="../js/data.js"></script>
-    <script src="../js/dashboard.js"></script>
+    <script src="../js/mock-auth.js"></script>
     <script src="../js/browse-jobs.js"></script>
 </body>
 </html>
