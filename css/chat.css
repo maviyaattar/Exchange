@@ -104,8 +104,7 @@
 
 .conversation-item.active {
     background: linear-gradient(90deg, rgba(102, 126, 234, 0.12) 0%, transparent 100%);
-    border-left: 4px solid transparent;
-    border-image: var(--primary-gradient) 1;
+    border-left: 4px solid var(--primary-color);
 }
 
 .conversation-item.active::before {
