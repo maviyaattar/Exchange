@@ -132,29 +132,23 @@ async function addCoins() {
             return;
         }
         
-        const db = getFirestore();
-        
+        // Mock implementation - no Firebase needed
         try {
-            // Update user coins
-            await db.collection('users').doc(currentUser.uid).update({
-                coins: firebase.firestore.FieldValue.increment(coins),
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            
-            // Add transaction record
-            await db.collection('transactions').add({
-                userId: currentUser.uid,
-                date: new Date().toISOString().split('T')[0],
-                description: 'Coins added to wallet',
-                amount: coins,
-                type: 'credit',
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            
             // Update localStorage
             const user = getCurrentUser();
             user.coins += coins;
             saveUserData(user);
+            
+            // Add transaction record (mock)
+            const transactions = getTransactions();
+            transactions.unshift({
+                id: transactions.length + 1,
+                date: new Date().toISOString().split('T')[0],
+                description: 'Coins added to wallet',
+                amount: coins,
+                type: 'credit',
+                createdAt: new Date().toISOString()
+            });
             
             alert(`✅ ${coins} coins added to your wallet!`);
             location.reload();
@@ -198,23 +192,20 @@ async function withdrawCoins() {
         try {
             // Update user coins
             await db.collection('users').doc(currentUser.uid).update({
-                coins: firebase.firestore.FieldValue.increment(-coins),
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
+            // Update localStorage
+            user.coins -= coins;
+            saveUserData(user);
             
-            // Add transaction record
-            await db.collection('transactions').add({
-                userId: currentUser.uid,
+            // Add transaction record (mock)
+            const transactions = getTransactions();
+            transactions.unshift({
+                id: transactions.length + 1,
                 date: new Date().toISOString().split('T')[0],
                 description: 'Withdrawal to bank account',
                 amount: -coins,
                 type: 'debit',
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                createdAt: new Date().toISOString()
             });
-            
-            // Update localStorage
-            user.coins -= coins;
-            saveUserData(user);
             
             alert(`✅ Withdrawal of ${coins} coins initiated!\n\nThe amount will be transferred to your bank account within 2-3 business days.`);
             location.reload();

@@ -62,13 +62,16 @@ async function saveFCMToken(token) {
     
     if (!currentUser) return;
     
-    const db = getFirestore();
-    
+    // Mock implementation - no Firebase needed
+    console.log('FCM token would be saved:', token);
+    // In a real implementation, this would save to backend
     try {
-        await db.collection('users').doc(currentUser.uid).update({
-            fcmToken: token,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
+        const user = getCurrentUser();
+        if (user) {
+            user.fcmToken = token;
+            user.updatedAt = new Date().toISOString();
+            localStorage.setItem('skillexchange_user', JSON.stringify(user));
+        }
     } catch (error) {
         console.error('Error saving FCM token:', error);
     }
@@ -194,21 +197,21 @@ function getNotificationIcon(type) {
 
 async function handleNotificationClick(notifId) {
     const auth = getAuth();
-    const currentUser = auth.currentUser;
+    const currentUser = getCurrentUser();
     
     if (!currentUser) return;
     
-    const db = getFirestore();
-    
+    // Mock implementation - mark as read locally
     try {
-        // Mark as read in Firestore
-        await db.collection('notifications').doc(notifId).update({
-            read: true,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
+        const notifications = getNotifications();
+        const notification = notifications.find(n => n.id === notifId);
+        if (notification) {
+            notification.read = true;
+            notification.updatedAt = new Date().toISOString();
+        }
         
         // Reload notifications
-        await loadNotificationsFromFirestore();
+        loadNotifications();
     } catch (error) {
         console.error('Error marking notification as read:', error);
     }
@@ -232,21 +235,21 @@ async function markAllAsRead() {
             .where('read', '==', false)
             .get();
         
-        if (snapshot.empty) {
+        const notifications = getNotifications();
+        const unreadNotifs = notifications.filter(n => !n.read);
+        
+        if (unreadNotifs.length === 0) {
             alert('All notifications are already read!');
             return;
         }
         
-        // Mark all as read
-        const batch = db.batch();
-        snapshot.docs.forEach(doc => {
-            batch.update(doc.ref, { 
-                read: true,
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
+        // Mark all as read (mock implementation)
+        unreadNotifs.forEach(notification => {
+            notification.read = true;
+            notification.updatedAt = new Date().toISOString();
         });
         
-        await batch.commit();
+        // Reload notifications
         
         alert(`✅ Marked ${snapshot.size} notification(s) as read`);
         
