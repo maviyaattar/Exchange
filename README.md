@@ -1,30 +1,32 @@
-# WorkCoin - Coin-Based Work Marketplace
+# Skill Exchange - Skills Marketplace Platform
 
-A complete web application for a coin-based work marketplace platform (similar to Fiverr/Upwork). Built with HTML, CSS, vanilla JavaScript, and Firebase backend.
+A complete web application for a skills-based marketplace platform. Built with HTML, CSS, vanilla JavaScript, and mock data backend (formerly Firebase-based).
 
 ## 🎯 Overview
 
-WorkCoin is a work marketplace where:
+Skill Exchange is a marketplace where:
 - **Clients** post jobs and offer coins as payment
 - **Workers** browse jobs, apply, and earn coins for completed work
 - **Coins** serve as virtual internal credits for all transactions
-- **Firebase** provides authentication, real-time database, and cloud messaging
+- **Mock Data** provides all backend functionality without external dependencies
 
 ## ✨ Features
 
 ### Core Functionality
 - 🏠 **Landing Page** - Hero section, categories, featured jobs
-- 🔐 **Authentication** - Login/Register with Firebase Authentication
+- 🔐 **Authentication** - Login/Register with mock authentication system
 - 📊 **Dashboard** - Overview of stats, recent activity, and quick actions
-- 💼 **Browse Jobs** - Search, filter by category, sort jobs (loaded from Firestore)
+- 💼 **Browse Jobs** - Search, filter by category, sort jobs
 - 📋 **Job Details** - Complete job information with apply functionality
-- ➕ **Post Job** - Form for clients to create new job listings (saved to Firestore)
+- ➕ **Post Job** - Form for clients to create new job listings
 - 📂 **My Jobs** - Manage active, in-progress, and completed jobs
 - 📤 **Submit Work** - Upload deliverables and submit for review
-- 💰 **Wallet** - View balance, locked coins, and transaction history (Firestore)
+- 💰 **Wallet** - View balance, locked coins, and transaction history
 - 👤 **Profile** - User information, skills, ratings, and recent work
-- 🔔 **Notifications** - Activity feed with Firebase Cloud Messaging
+- 🔔 **Notifications** - Activity feed with notifications
+- 💬 **Messages** - Chat system for client-worker communication
 - ⚙️ **Settings** - Account, appearance, and privacy settings
+- 📄 **Legal Pages** - Privacy Policy and Terms & Conditions
 
 ### Design Features
 - ✅ Fully responsive (mobile, tablet, desktop)
@@ -34,85 +36,21 @@ WorkCoin is a work marketplace where:
 - ✅ Professional icons with Font Awesome
 - ✅ Clean, modern UI with smooth animations
 - ✅ Intuitive user experience
+- ✅ Skeleton loaders and loading animations
 
-### Firebase Integration
-- ✅ Firebase Authentication (Email/Password, Anonymous)
-- ✅ Cloud Firestore for real-time data storage
-- ✅ Firebase Storage for file uploads
-- ✅ Firebase Cloud Messaging for push notifications
-- ✅ Automatic user profile creation
-- ✅ Real-time job updates
-- ✅ Transaction tracking
+### Data Management
+- ✅ Mock authentication system (no external dependencies)
+- ✅ LocalStorage for user session management
+- ✅ Comprehensive mock data for all features
+- ✅ Simulated async operations for realistic UX
+- ✅ Data persistence across sessions
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 - A modern web browser
-- Python 3 (for local development server)
-- Firebase account (for backend services)
-
-### Firebase Setup
-
-1. Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
-
-2. Enable the following services:
-   - **Authentication**: Enable Email/Password and Anonymous providers
-   - **Cloud Firestore**: Create database in production mode
-   - **Cloud Messaging**: Enable FCM and get your VAPID key
-   - **Storage**: Enable Firebase Storage
-
-3. Update Firebase configuration in `js/firebase-init.js`:
-```javascript
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-```
-
-4. Update the VAPID key in `js/notifications.js`:
-```javascript
-vapidKey: 'YOUR_VAPID_KEY_HERE'
-```
-
-5. Set up Firestore security rules:
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /users/{userId} {
-      allow read: if request.auth != null;
-      allow write: if request.auth.uid == userId;
-    }
-    
-    match /jobs/{jobId} {
-      allow read: if request.auth != null;
-      allow create: if request.auth != null;
-      allow update, delete: if request.auth.uid == resource.data.clientId;
-    }
-    
-    match /applications/{applicationId} {
-      allow read: if request.auth != null;
-      allow create: if request.auth != null;
-      allow update, delete: if request.auth.uid == resource.data.workerId;
-    }
-    
-    match /transactions/{transactionId} {
-      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
-      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
-    }
-    
-    match /notifications/{notificationId} {
-      allow read, update: if request.auth != null && request.auth.uid == resource.data.userId;
-      allow create: if request.auth != null;
-    }
-  }
-}
-```
+- Python 3 (for local development server) or any other HTTP server
 
 ### Installation
 
@@ -129,16 +67,21 @@ python3 -m http.server 8080
 
 3. Open your browser: `http://localhost:8080`
 
+## 🔐 Demo Accounts
+
+You can use these demo accounts to test the application:
+
+- Email: `john@example.com` / Password: `password123`
+- Email: `demo@example.com` / Password: `demo123`
+
+Or create a new account, or continue as a guest!
+
 ## 🛠️ Technologies
 
 - **HTML5** - Semantic markup
 - **CSS3** - Modern styling with Grid and Flexbox
-- **Vanilla JavaScript** - No frameworks
-- **Firebase** - Backend services
-  - Authentication
-  - Cloud Firestore
-  - Cloud Storage
-  - Cloud Messaging
+- **Vanilla JavaScript** - No frameworks, pure JS
+- **LocalStorage** - Client-side data persistence
 - **Font Awesome** - Professional icon library
 
 ## 📱 Responsive Design
@@ -146,13 +89,6 @@ python3 -m http.server 8080
 - Mobile: < 768px
 - Tablet: 768px - 1024px  
 - Desktop: > 1024px
-
-## 🔒 Security
-
-- Firebase Authentication for secure user management
-- Firestore security rules to protect user data
-- Input validation and sanitization
-- Secure transaction handling
 
 ## 📦 Project Structure
 
@@ -167,24 +103,40 @@ Exchange/
 │   ├── post-job.html
 │   ├── my-jobs.html
 │   ├── wallet.html
+│   ├── chat.html
 │   ├── profile.html
 │   ├── notifications.html
+│   ├── settings.html
+│   ├── privacy-policy.html
+│   ├── terms-and-conditions.html
 │   └── ...
 ├── css/                    # Stylesheets
 │   ├── global.css
 │   ├── landing.css
 │   ├── dashboard.css
+│   ├── auth.css
 │   └── ...
 ├── js/                     # JavaScript files
-│   ├── firebase-init.js    # Firebase initialization
+│   ├── mock-auth.js        # Mock authentication system
+│   ├── data.js             # Mock data and helpers
 │   ├── auth.js             # Authentication logic
-│   ├── data.js             # Data helpers
 │   ├── dashboard.js
 │   ├── browse-jobs.js
 │   ├── post-job.js
 │   └── ...
-└── firebase-messaging-sw.js # Service worker for FCM
+└── .gitignore
 ```
+
+## 🔄 Recent Changes
+
+- ✅ Removed all Firebase dependencies
+- ✅ Implemented mock authentication system
+- ✅ Added comprehensive mock data backend
+- ✅ Renamed from "WorkCoin" to "Skill Exchange"
+- ✅ Added Privacy Policy page
+- ✅ Added Terms and Conditions page
+- ✅ Improved responsive design
+- ✅ Added loading animations and skeleton loaders
 
 ## 🤝 Contributing
 
@@ -196,5 +148,5 @@ This project is open source and available under the MIT License.
 
 ---
 
-**Built with Firebase and modern web technologies for a scalable marketplace platform.**
+**Built with modern web technologies for a fully functional standalone marketplace platform.**
 

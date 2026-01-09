@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorkCoin - Your Work Marketplace</title>
+    <title>Skill Exchange - Your Skills Marketplace</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/landing.css">
@@ -13,7 +13,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <span class="logo"><i class="fas fa-coins"></i> WorkCoin</span>
+                <span class="logo"><i class="fas fa-exchange-alt"></i> Skill Exchange</span>
             </div>
             <div class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link active">Home</a>
@@ -31,13 +31,13 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero fade-in">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Find Work. Earn Coins. Build Your Future.</h1>
+            <div class="hero-content fade-in-up">
+                <h1 class="hero-title">Exchange Skills. Build Connections. Grow Together.</h1>
                 <p class="hero-description">
                     Join the marketplace where your skills meet opportunities. 
-                    Get paid in coins for quality work delivered.
+                    Exchange your expertise with others and earn coins for quality work delivered.
                 </p>
                 <div class="hero-actions">
                     <a href="pages/browse-jobs.html" class="btn btn-primary btn-large">Find Work</a>
@@ -45,15 +45,15 @@
                 </div>
             </div>
             <div class="hero-stats">
-                <div class="stat-card">
+                <div class="stat-card fade-in-up stagger-1">
                     <div class="stat-number">10K+</div>
                     <div class="stat-label">Active Jobs</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card fade-in-up stagger-2">
                     <div class="stat-number">50K+</div>
                     <div class="stat-label">Workers</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card fade-in-up stagger-3">
                     <div class="stat-number">1M+</div>
                     <div class="stat-label">Coins Earned</div>
                 </div>
@@ -62,11 +62,11 @@
     </section>
 
     <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
+    <section class="how-it-works fade-in" id="how-it-works">
         <div class="container">
             <h2 class="section-title">How It Works</h2>
             <div class="steps-grid">
-                <div class="step-card">
+                <div class="step-card fade-in-up stagger-1 hover-lift transition-all">
                     <div class="step-icon"><i class="fas fa-edit"></i></div>
                     <h3 class="step-title">1. Post Work</h3>
                     <p class="step-description">
@@ -74,7 +74,7 @@
                         Workers browse and apply to opportunities.
                     </p>
                 </div>
-                <div class="step-card">
+                <div class="step-card fade-in-up stagger-2 hover-lift transition-all">
                     <div class="step-icon"><i class="fas fa-briefcase"></i></div>
                     <h3 class="step-title">2. Complete Work</h3>
                     <p class="step-description">
@@ -82,7 +82,7 @@
                         Submit deliverables for client review.
                     </p>
                 </div>
-                <div class="step-card">
+                <div class="step-card fade-in-up stagger-3 hover-lift transition-all">
                     <div class="step-icon"><i class="fas fa-coins"></i></div>
                     <h3 class="step-title">3. Earn Coins</h3>
                     <p class="step-description">
@@ -195,10 +195,10 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h4 class="footer-title">About WorkCoin</h4>
+                    <h4 class="footer-title">About Skill Exchange</h4>
                     <p class="footer-text">
                         The trusted marketplace for connecting clients with talented workers. 
-                        Earn coins for quality work delivered.
+                        Exchange skills and earn coins for quality work delivered.
                     </p>
                 </div>
                 <div class="footer-section">
@@ -211,37 +211,31 @@
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4 class="footer-title">Support</h4>
+                    <h4 class="footer-title">Legal</h4>
                     <ul class="footer-links">
+                        <li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="pages/terms-and-conditions.html">Terms & Conditions</a></li>
                         <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4 class="footer-title">Contact</h4>
                     <p class="footer-text">
-                        Email: support@workcoin.com<br>
+                        Email: support@skillexchange.com<br>
                         Phone: (555) 123-4567
                     </p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 WorkCoin. All rights reserved.</p>
+                <p>&copy; 2024 Skill Exchange. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-messaging-compat.js"></script>
-    
-    <!-- Firebase Initialization -->
-    <script src="js/firebase-init.js"></script>
+    <!-- Mock Data and Authentication -->
+    <script src="js/data.js"></script>
+    <script src="js/mock-auth.js"></script>
     <script src="js/navigation.js"></script>
 </body>
 </html>

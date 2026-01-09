@@ -550,3 +550,234 @@ a:hover {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 }
+
+/* ==========================================
+   SKELETON LOADERS & ANIMATIONS
+   ========================================== */
+
+/* Skeleton Loader Base */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--bg-tertiary) 0%,
+        var(--bg-secondary) 50%,
+        var(--bg-tertiary) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Skeleton Variants */
+.skeleton-text {
+    height: 1rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.skeleton-title {
+    height: 1.5rem;
+    width: 60%;
+    margin-bottom: var(--spacing-md);
+}
+
+.skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.skeleton-card {
+    height: 200px;
+    border-radius: var(--radius-md);
+}
+
+.skeleton-button {
+    height: 40px;
+    width: 120px;
+    border-radius: var(--radius-sm);
+}
+
+/* Fade In Animations */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.fade-in-down {
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.fade-in-left {
+    animation: fadeInLeft 0.6s ease-out;
+}
+
+.fade-in-right {
+    animation: fadeInRight 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Staggered Animation Delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Scale Animations */
+.scale-in {
+    animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Pulse Animation for Loading States */
+.pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Smooth Transitions */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.transition-colors {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.transition-transform {
+    transition: transform 0.3s ease;
+}
+
+/* Hover Effects */
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Loading Spinner */
+.spinner {
+    border: 3px solid var(--bg-tertiary);
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+.spinner-sm {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Page Transitions */
+.page-transition {
+    animation: pageTransition 0.4s ease-out;
+}
+
+@keyframes pageTransition {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
