@@ -2,19 +2,20 @@
    MODERN CHAT INTERFACE (WhatsApp/Instagram Style)
    ========================================== */
 
-/* Chat Container */
+/* Chat Container - Enhanced */
 .chat-container {
     display: grid;
     grid-template-columns: 380px 1fr;
     gap: 0;
     height: calc(100vh - 120px);
     background: var(--chat-bg);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-2xl);
     overflow: hidden;
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-2xl);
+    border: 1px solid var(--border-light);
 }
 
-/* Conversations Panel */
+/* Conversations Panel - Enhanced */
 .conversations-panel {
     background: white;
     border-right: 1px solid var(--border-light);
@@ -25,13 +26,13 @@
 .conversations-header {
     padding: var(--spacing-xl);
     border-bottom: 1px solid var(--border-light);
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
 }
 
 .conversations-header h2 {
     margin: 0 0 var(--spacing-md) 0;
     font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-extrabold);
     background: var(--primary-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -42,10 +43,10 @@
     width: 100%;
     padding: var(--spacing-md) var(--spacing-lg);
     padding-left: 45px;
-    border: 1px solid var(--border-light);
+    border: 2px solid var(--border-light);
     border-radius: var(--radius-full);
     font-size: var(--font-size-sm);
-    background: var(--bg-secondary);
+    background: white;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cpath d='m21 21-4.35-4.35'%3E%3C/path%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: 15px center;
@@ -57,7 +58,8 @@
     outline: none;
     border-color: var(--primary-color);
     background-color: white;
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    transform: translateY(-1px);
 }
 
 .conversations-list {
@@ -88,7 +90,7 @@
     padding: var(--spacing-lg) var(--spacing-xl);
     border-bottom: 1px solid var(--border-light);
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all var(--transition-base);
     display: flex;
     gap: var(--spacing-md);
     align-items: flex-start;
@@ -96,12 +98,14 @@
 }
 
 .conversation-item:hover {
-    background-color: var(--bg-secondary);
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.05) 0%, transparent 100%);
+    transform: translateX(4px);
 }
 
 .conversation-item.active {
-    background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, transparent 100%);
-    border-left: 3px solid var(--primary-color);
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.12) 0%, transparent 100%);
+    border-left: 4px solid transparent;
+    border-image: var(--primary-gradient) 1;
 }
 
 .conversation-item.active::before {
@@ -110,8 +114,9 @@
     left: 0;
     top: 0;
     bottom: 0;
-    width: 3px;
+    width: 4px;
     background: var(--primary-gradient);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
 }
 
 .conversation-avatar {
@@ -124,7 +129,13 @@
     background: var(--primary-gradient);
     border-radius: var(--radius-full);
     position: relative;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-base);
+}
+
+.conversation-item:hover .conversation-avatar {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-primary);
 }
 
 .conversation-avatar.status-indicator.online::after {
@@ -390,9 +401,15 @@
     border-radius: var(--radius-xl);
     background: white;
     word-wrap: break-word;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
     position: relative;
     line-height: 1.5;
+    transition: all var(--transition-base);
+}
+
+.message:hover .message-bubble {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
 }
 
 /* WhatsApp-style message tail */
@@ -415,6 +432,10 @@
     background: var(--chat-bubble-sent-gradient);
     color: white;
     box-shadow: var(--shadow-primary);
+}
+
+.message.sent:hover .message-bubble {
+    box-shadow: 0 12px 30px -5px rgba(99, 102, 241, 0.4);
 }
 
 .message.sent .message-bubble::before {
@@ -560,13 +581,14 @@
     transform: scale(1.02);
 }
 
-/* Chat Input */
+/* Chat Input - Enhanced */
 .chat-input-container {
-    padding: var(--spacing-lg) var(--spacing-xl);
+    padding: var(--spacing-xl);
     background: white;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
     position: relative;
     z-index: 10;
+    border-top: 1px solid var(--border-light);
 }
 
 .file-upload-area {
@@ -611,6 +633,14 @@
     background: var(--bg-secondary);
     border-radius: var(--radius-2xl);
     padding: var(--spacing-sm);
+    border: 2px solid transparent;
+    transition: all var(--transition-base);
+}
+
+.chat-input-wrapper:focus-within {
+    border-color: var(--primary-color);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
 .chat-input-actions {
@@ -627,7 +657,7 @@
 
 .chat-input-actions .btn-icon:hover {
     color: var(--primary-color);
-    transform: scale(1.1);
+    transform: scale(1.15) rotate(5deg);
 }
 
 .chat-input {
@@ -652,8 +682,8 @@
 }
 
 .send-button {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: var(--radius-full);
     background: var(--primary-gradient);
     color: white;
@@ -667,7 +697,7 @@
 }
 
 .send-button:hover {
-    transform: scale(1.1) rotate(15deg);
+    transform: scale(1.15) rotate(15deg);
     box-shadow: var(--shadow-primary);
 }
 

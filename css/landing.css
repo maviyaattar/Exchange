@@ -2,14 +2,21 @@
    LANDING PAGE STYLES
    ========================================== */
 
-/* Navigation */
+/* Navigation - Enhanced */
 .navbar {
-    background-color: var(--bg-color);
-    border-bottom: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-light);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all var(--transition-base);
+}
+
+.navbar:hover {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
 }
 
 .navbar .container {
@@ -22,7 +29,21 @@
 .nav-brand .logo {
     font-size: var(--font-size-xl);
     font-weight: 700;
-    color: var(--primary-color);
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.nav-brand .logo:hover {
+    transform: scale(1.05);
+}
+
+.nav-brand .logo i {
+    margin-right: var(--spacing-xs);
+    animation: float 3s ease-in-out infinite;
 }
 
 .nav-menu {
@@ -32,33 +53,69 @@
 }
 
 .nav-link {
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-secondary);
-    transition: color var(--transition-fast);
+    transition: all var(--transition-base);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-lg);
+    position: relative;
 }
 
-.nav-link:hover,
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-gradient);
+    transform: translateX(-50%);
+    transition: width var(--transition-base);
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+    background: rgba(99, 102, 241, 0.05);
+    transform: translateY(-2px);
+}
+
+.nav-link:hover::before {
+    width: 80%;
+}
+
 .nav-link.active {
     color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+.nav-link.active::before {
+    width: 80%;
 }
 
 .nav-toggle {
     display: none;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
     padding: var(--spacing-sm);
+    position: relative;
+    z-index: 101;
+    transition: all var(--transition-base);
+}
+
+.nav-toggle:hover {
+    transform: scale(1.1);
 }
 
 .nav-toggle span {
     display: block;
-    width: 24px;
+    width: 26px;
     height: 3px;
-    background-color: var(--text-primary);
+    background: var(--primary-gradient);
     border-radius: var(--radius-sm);
-    transition: all var(--transition-fast);
+    transition: all var(--transition-base);
 }
 
 /* Hero Section */
@@ -335,21 +392,34 @@
         top: var(--header-height);
         left: 0;
         right: 0;
-        background-color: var(--bg-color);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
-        padding: var(--spacing-lg);
-        border-bottom: 1px solid var(--border-color);
-        box-shadow: var(--shadow-md);
+        padding: var(--spacing-xl);
+        border-bottom: 1px solid var(--border-light);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
         transform: translateY(-100%);
         opacity: 0;
         visibility: hidden;
         transition: all var(--transition-base);
+        max-height: calc(100vh - var(--header-height));
+        overflow-y: auto;
     }
     
     .nav-menu.active {
         transform: translateY(0);
         opacity: 1;
         visibility: visible;
+        animation: slideInDown 0.3s ease-out;
+    }
+    
+    .nav-link {
+        width: 100%;
+        text-align: center;
+        padding: var(--spacing-md) var(--spacing-lg);
+        border-radius: var(--radius-xl);
+        font-size: var(--font-size-lg);
     }
     
     .nav-toggle {
@@ -357,15 +427,18 @@
     }
     
     .nav-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
+        transform: rotate(45deg) translate(6px, 6px);
+        background: var(--error-gradient);
     }
     
     .nav-toggle.active span:nth-child(2) {
         opacity: 0;
+        transform: scale(0);
     }
     
     .nav-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -7px);
+        transform: rotate(-45deg) translate(8px, -8px);
+        background: var(--error-gradient);
     }
     
     .hero-title {
