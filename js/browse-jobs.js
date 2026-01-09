@@ -247,14 +247,16 @@ async function applyToJob(jobId) {
                 workerEmail: user.email,
                 workerRating: user.rating || 0,
                 status: 'pending',
-                appliedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                appliedAt: new Date().toISOString(),
                 message: 'I am interested in this job and have the required skills.'
             });
             
-            // Increment applications count
-            await db.collection('jobs').doc(jobId).update({
-                applications: firebase.firestore.FieldValue.increment(1)
-            });
+            // Increment applications count (mock implementation)
+            // In a real backend, this would be handled server-side
+            const job = getJobById(jobId);
+            if (job) {
+                job.applications = (job.applications || 0) + 1;
+            }
             
             alert('✅ Application submitted successfully! The client will review your application.');
             

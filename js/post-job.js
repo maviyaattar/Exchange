@@ -100,22 +100,16 @@ async function postJob(jobData) {
             clientEmail: user.email,
             applications: 0,
             postedDate: new Date().toISOString().split('T')[0],
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
         };
         
-        // Add job to Firestore
-        const jobRef = await db.collection('jobs').add(jobDoc);
+        // Mock implementation - add to local storage
+        const jobs = getAllJobs();
+        jobDoc.id = jobs.length + 1;
+        jobs.push(jobDoc);
         
-        // Update user's locked coins
-        const userRef = db.collection('users').doc(currentUser.uid);
-        await userRef.update({
-            coins: firebase.firestore.FieldValue.increment(-jobData.coins),
-            lockedCoins: firebase.firestore.FieldValue.increment(jobData.coins),
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        
-        // Update localStorage
+        // Update user's locked coins (mock implementation)
         user.coins -= jobData.coins;
         user.lockedCoins = (user.lockedCoins || 0) + jobData.coins;
         saveUserData(user);
