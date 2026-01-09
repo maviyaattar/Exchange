@@ -253,6 +253,13 @@ a:hover {
     min-height: 120px;
 }
 
+.form-hint {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
 /* Badges */
 .badge {
     display: inline-block;
@@ -372,6 +379,164 @@ a:hover {
     /* Improve form spacing on mobile */
     .form-group {
         margin-bottom: var(--spacing-md);
+    }
+}
+
+/* Alert System */
+.alert-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    max-width: 400px;
+    pointer-events: none;
+}
+
+.alert {
+    pointer-events: auto;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    background-color: var(--bg-color);
+    border-left: 4px solid;
+    animation: slideInRight 0.3s ease-out;
+}
+
+.alert.fade-out {
+    animation: slideOutRight 0.3s ease-out forwards;
+}
+
+.alert-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.alert-content {
+    flex: 1;
+}
+
+.alert-title {
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-base);
+}
+
+.alert-message {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.alert-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    line-height: 1;
+    transition: color var(--transition-fast);
+}
+
+.alert-close:hover {
+    color: var(--text-primary);
+}
+
+/* Alert Types */
+.alert-success {
+    border-color: var(--success-color);
+}
+
+.alert-success .alert-icon {
+    color: var(--success-color);
+}
+
+.alert-error {
+    border-color: var(--error-color);
+}
+
+.alert-error .alert-icon {
+    color: var(--error-color);
+}
+
+.alert-warning {
+    border-color: var(--warning-color);
+}
+
+.alert-warning .alert-icon {
+    color: var(--warning-color);
+}
+
+.alert-info {
+    border-color: var(--info-color);
+}
+
+.alert-info .alert-icon {
+    color: var(--info-color);
+}
+
+/* Alert Animations */
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+/* Mobile Responsive Alerts */
+@media (max-width: 768px) {
+    .alert-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .alert {
+        padding: var(--spacing-md);
+    }
+    
+    @keyframes slideInRight {
+        from {
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-100px);
+            opacity: 0;
+        }
     }
 }
 
