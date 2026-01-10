@@ -6,12 +6,13 @@
     <title>Login - WorkCoin</title>
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">
-                <div class="logo">💰 WorkCoin</div>
+                <div class="logo"><i class="fas fa-coins"></i> WorkCoin</div>
                 <h1>Welcome Back</h1>
                 <p>Login to continue to your account</p>
             </div>
@@ -47,14 +48,20 @@
                     <a href="#" class="link-text">Forgot password?</a>
                 </div>
                 
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
                 
                 <div class="divider">
                     <span>OR</span>
                 </div>
                 
+                <button type="button" class="btn btn-google btn-block" id="googleSignInBtn">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+                
                 <button type="button" class="btn btn-outline btn-block" id="guestBtn">
-                    Continue as Guest
+                    <i class="fas fa-user"></i> Continue as Guest
                 </button>
             </form>
             

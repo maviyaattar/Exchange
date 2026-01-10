@@ -6,12 +6,13 @@
     <title>Register - WorkCoin</title>
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">
-                <div class="logo">💰 WorkCoin</div>
+                <div class="logo"><i class="fas fa-coins"></i> WorkCoin</div>
                 <h1>Create Account</h1>
                 <p>Join WorkCoin and start your journey</p>
             </div>
@@ -51,35 +52,23 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">I want to</label>
-                    <div class="role-selector">
-                        <label class="role-option">
-                            <input type="radio" name="role" value="worker" checked>
-                            <div class="role-card">
-                                <div class="role-icon">💼</div>
-                                <div class="role-title">Find Work</div>
-                                <div class="role-desc">I want to work and earn coins</div>
-                            </div>
-                        </label>
-                        <label class="role-option">
-                            <input type="radio" name="role" value="client">
-                            <div class="role-card">
-                                <div class="role-icon">📝</div>
-                                <div class="role-title">Post Work</div>
-                                <div class="role-desc">I want to hire workers</div>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="form-group">
                     <label class="checkbox-label">
                         <input type="checkbox" id="terms" required>
                         <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
                     </label>
                 </div>
                 
-                <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+                
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+                
+                <button type="button" class="btn btn-google btn-block" id="googleSignUpBtn">
+                    <i class="fab fa-google"></i> Sign up with Google
+                </button>
             </form>
             
             <div class="auth-footer">

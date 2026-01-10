@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatJobTitle = document.getElementById('chatJobTitle');
     const viewJobBtn = document.getElementById('viewJobBtn');
     const approveWorkBtn = document.getElementById('approveWorkBtn');
+    const negotiateBtn = document.getElementById('negotiateBtn');
 
     let currentConversation = null;
     let selectedFiles = [];
@@ -229,6 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show action buttons
         viewJobBtn.style.display = 'inline-flex';
         approveWorkBtn.style.display = 'inline-flex';
+        negotiateBtn.style.display = 'inline-flex';
 
         // Show input
         chatInputContainer.style.display = 'block';
@@ -443,6 +445,30 @@ document.addEventListener('DOMContentLoaded', function() {
             
             sampleMessages[currentConversation.id].push(message);
             loadMessages(currentConversation.id);
+        }
+    });
+
+    // Negotiate button
+    negotiateBtn.addEventListener('click', () => {
+        if (!currentConversation) return;
+
+        const newPrice = prompt(`Current price: ${currentConversation.job.coins} coins. Enter your counter-offer:`);
+        
+        if (newPrice && !isNaN(newPrice)) {
+            const message = {
+                id: 'msg' + Date.now(),
+                text: `💰 Counter-offer: ${newPrice} coins for "${currentConversation.job.title}"`,
+                sender: user.email,
+                timestamp: Date.now(),
+                files: [],
+                isNegotiation: true
+            };
+            
+            sampleMessages[currentConversation.id].push(message);
+            loadMessages(currentConversation.id);
+            
+            // Auto-scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
     });
 
