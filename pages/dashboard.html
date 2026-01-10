@@ -6,50 +6,51 @@
     <title>Dashboard - WorkCoin</title>
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="app-layout">
         <!-- Sidebar Navigation (Desktop) -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="logo">💰 WorkCoin</div>
+                <div class="logo"><i class="fas fa-coins"></i> WorkCoin</div>
             </div>
             <nav class="sidebar-nav">
                 <a href="dashboard.html" class="nav-item active">
-                    <span class="nav-icon">📊</span>
+                    <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
                     <span class="nav-text">Dashboard</span>
                 </a>
                 <a href="browse-jobs.html" class="nav-item">
-                    <span class="nav-icon">💼</span>
+                    <span class="nav-icon"><i class="fas fa-briefcase"></i></span>
                     <span class="nav-text">Browse Jobs</span>
                 </a>
                 <a href="my-jobs.html" class="nav-item">
-                    <span class="nav-icon">📋</span>
+                    <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
                     <span class="nav-text">My Jobs</span>
                 </a>
                 <a href="post-job.html" class="nav-item">
-                    <span class="nav-icon">➕</span>
+                    <span class="nav-icon"><i class="fas fa-plus-circle"></i></span>
                     <span class="nav-text">Post Job</span>
                 </a>
                 <a href="wallet.html" class="nav-item">
-                    <span class="nav-icon">💰</span>
+                    <span class="nav-icon"><i class="fas fa-wallet"></i></span>
                     <span class="nav-text">Wallet</span>
                 </a>
                 <a href="chat.html" class="nav-item">
-                    <span class="nav-icon">💬</span>
+                    <span class="nav-icon"><i class="fas fa-comments"></i></span>
                     <span class="nav-text">Messages</span>
                 </a>
                 <a href="notifications.html" class="nav-item">
-                    <span class="nav-icon">🔔</span>
+                    <span class="nav-icon"><i class="fas fa-bell"></i></span>
                     <span class="nav-text">Notifications</span>
                     <span class="badge badge-error" id="notifBadge">0</span>
                 </a>
                 <a href="profile.html" class="nav-item">
-                    <span class="nav-icon">👤</span>
+                    <span class="nav-icon"><i class="fas fa-user"></i></span>
                     <span class="nav-text">Profile</span>
                 </a>
                 <a href="settings.html" class="nav-item">
-                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-icon"><i class="fas fa-cog"></i></span>
                     <span class="nav-text">Settings</span>
                 </a>
             </nav>
@@ -73,7 +74,7 @@
                         <span class="coin-amount" id="headerCoins">0</span>
                     </div>
                     <div class="user-menu">
-                        <div class="user-avatar" id="userAvatar">👤</div>
+                        <div class="user-avatar" id="userAvatar"><i class="fas fa-user-circle"></i></div>
                         <span class="user-name" id="userName">User</span>
                     </div>
                 </div>
@@ -90,14 +91,14 @@
                 <!-- Stats Cards -->
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-icon success">💰</div>
+                        <div class="stat-icon success"><i class="fas fa-coins"></i></div>
                         <div class="stat-content">
                             <div class="stat-label">Total Coins</div>
                             <div class="stat-value" id="totalCoins">0</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon primary">📋</div>
+                        <div class="stat-icon primary"><i class="fas fa-clipboard-list"></i></div>
                         <div class="stat-content">
                             <div class="stat-label">Active Jobs</div>
                             <div class="stat-value" id="activeJobs">0</div>
@@ -130,7 +131,7 @@
                         <div class="action-desc">Browse available jobs</div>
                     </a>
                     <a href="post-job.html" class="action-card">
-                        <div class="action-icon">➕</div>
+                        <div class="action-icon"><i class="fas fa-plus-circle"></i></div>
                         <div class="action-title">Post a Job</div>
                         <div class="action-desc">Hire talented workers</div>
                     </a>
@@ -140,7 +141,7 @@
                         <div class="action-desc">Manage your coins</div>
                     </a>
                     <a href="my-jobs.html" class="action-card">
-                        <div class="action-icon">📊</div>
+                        <div class="action-icon"><i class="fas fa-chart-bar"></i></div>
                         <div class="action-title">My Jobs</div>
                         <div class="action-desc">Track your work</div>
                     </a>
@@ -169,23 +170,23 @@
         <!-- Bottom Navigation (Mobile) -->
         <nav class="bottom-nav">
             <a href="dashboard.html" class="bottom-nav-item active">
-                <span class="bottom-nav-icon">📊</span>
+                <span class="bottom-nav-icon"><i class="fas fa-chart-line"></i></span>
                 <span class="bottom-nav-text">Dashboard</span>
             </a>
             <a href="browse-jobs.html" class="bottom-nav-item">
-                <span class="bottom-nav-icon">💼</span>
+                <span class="bottom-nav-icon"><i class="fas fa-briefcase"></i></span>
                 <span class="bottom-nav-text">Jobs</span>
             </a>
             <a href="post-job.html" class="bottom-nav-item">
-                <span class="bottom-nav-icon">➕</span>
+                <span class="bottom-nav-icon"><i class="fas fa-plus-circle"></i></span>
                 <span class="bottom-nav-text">Post</span>
             </a>
             <a href="wallet.html" class="bottom-nav-item">
-                <span class="bottom-nav-icon">💰</span>
+                <span class="bottom-nav-icon"><i class="fas fa-wallet"></i></span>
                 <span class="bottom-nav-text">Wallet</span>
             </a>
             <a href="profile.html" class="bottom-nav-item">
-                <span class="bottom-nav-icon">👤</span>
+                <span class="bottom-nav-icon"><i class="fas fa-user"></i></span>
                 <span class="bottom-nav-text">Profile</span>
             </a>
         </nav>
