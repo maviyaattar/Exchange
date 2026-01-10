@@ -340,11 +340,74 @@
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
             
-            // Simulate form submission
-            alert('Thank you for your message! We will get back to you soon.');
+            // Create success notification
+            const notification = document.createElement('div');
+            notification.className = 'success-notification fade-in-down';
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <strong>Message Sent!</strong>
+                    <p>Thank you for contacting us. We'll get back to you soon.</p>
+                </div>
+            `;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                .success-notification {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: var(--success-gradient);
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: var(--radius-lg);
+                    box-shadow: var(--shadow-xl);
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    z-index: 10000;
+                    max-width: 400px;
+                    animation: fadeInDown 0.5s ease-out;
+                }
+                
+                .success-notification i {
+                    font-size: 1.5rem;
+                }
+                
+                .success-notification strong {
+                    display: block;
+                    margin-bottom: 0.25rem;
+                }
+                
+                .success-notification p {
+                    margin: 0;
+                    font-size: var(--font-size-sm);
+                    opacity: 0.9;
+                }
+                
+                @keyframes fadeOut {
+                    to {
+                        opacity: 0;
+                        transform: translateY(-20px);
+                    }
+                }
+            `;
+            
+            if (!document.getElementById('notification-styles')) {
+                style.id = 'notification-styles';
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(notification);
             
             // Reset form
             this.reset();
+            
+            // Remove notification after 4 seconds
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.3s ease-out forwards';
+                setTimeout(() => notification.remove(), 300);
+            }, 4000);
         });
     </script>
 </body>

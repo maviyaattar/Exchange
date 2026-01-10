@@ -346,11 +346,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         try {
             // Mock Google authentication - in real app, use Firebase Google Auth
+            const timestamp = Date.now();
+            const randomId = Math.random().toString(36).substr(2, 5);
             const mockGoogleUser = {
                 uid: generateUID(),
-                email: 'googleuser@gmail.com',
+                email: `googleuser_${randomId}@gmail.com`,
                 name: 'Google User',
-                username: 'googleuser',
+                username: `googleuser_${randomId}`,
                 role: 'worker',
                 avatar: '👤',
                 coins: 200,
