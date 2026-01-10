@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update header
     document.getElementById('userName').textContent = user.name || 'User';
     document.getElementById('headerCoins').textContent = user.coins || 0;
-    document.getElementById('userAvatar').textContent = user.avatar || '👤';
+    const avatarElement = document.getElementById('userAvatar');
+    avatarElement.innerHTML = '<i class="fas fa-user"></i>';
 
     // Elements
     const conversationsList = document.getElementById('conversationsList');
@@ -429,13 +430,124 @@ document.addEventListener('DOMContentLoaded', function() {
     approveWorkBtn.addEventListener('click', () => {
         if (!currentConversation) return;
 
-        if (confirm(`Approve work and release ${currentConversation.job.coins} coins?`)) {
-            alert('✅ Work approved! Coins have been released to the worker.');
+        // Create custom confirmation modal
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-content scale-in">
+                <div class="modal-header">
+                    <h3><i class="fas fa-check-circle"></i> Approve Work & Release Coins</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to approve this work and release payment?</p>
+                    <div class="coin-release-info">
+                        <div class="coin-amount">
+                            <i class="fas fa-coins"></i> ${currentConversation.job.coins} Coins
+                        </div>
+                        <p class="release-note">This action cannot be undone. The coins will be immediately transferred to the worker's wallet.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="cancelApprove">Cancel</button>
+                    <button class="btn btn-primary" id="confirmApprove">
+                        <i class="fas fa-check"></i> Approve & Release
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Add modal styles if not already present
+        if (!document.getElementById('modal-styles')) {
+            const style = document.createElement('style');
+            style.id = 'modal-styles';
+            style.textContent = `
+                .modal-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.7);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                    animation: fadeIn 0.3s ease-out;
+                }
+                
+                .modal-content {
+                    background: var(--bg-color);
+                    border-radius: var(--radius-xl);
+                    max-width: 500px;
+                    width: 90%;
+                    box-shadow: var(--shadow-2xl);
+                }
+                
+                .modal-header {
+                    padding: 1.5rem;
+                    border-bottom: 1px solid var(--border-color);
+                }
+                
+                .modal-header h3 {
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-primary);
+                }
+                
+                .modal-body {
+                    padding: 1.5rem;
+                }
+                
+                .coin-release-info {
+                    background: var(--bg-secondary);
+                    padding: 1rem;
+                    border-radius: var(--radius-lg);
+                    margin-top: 1rem;
+                    text-align: center;
+                }
+                
+                .coin-amount {
+                    font-size: var(--font-size-2xl);
+                    font-weight: var(--font-weight-bold);
+                    color: var(--accent-color);
+                    margin-bottom: 0.5rem;
+                }
+                
+                .release-note {
+                    font-size: var(--font-size-sm);
+                    color: var(--text-secondary);
+                    margin: 0.5rem 0 0;
+                }
+                
+                .modal-footer {
+                    padding: 1.5rem;
+                    border-top: 1px solid var(--border-color);
+                    display: flex;
+                    gap: 1rem;
+                    justify-content: flex-end;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        document.getElementById('cancelApprove').addEventListener('click', () => {
+            modal.remove();
+        });
+        
+        document.getElementById('confirmApprove').addEventListener('click', () => {
+            modal.remove();
+            
+            // Show success message
+            showSuccessMessage('Work Approved!', `${currentConversation.job.coins} coins have been released to the worker.`);
             
             // In real app, this would update Firebase and user coins
             const message = {
                 id: 'msg' + Date.now(),
-                text: '✅ Work has been approved! Payment released.',
+                text: '<i class="fas fa-check-circle" style="color: var(--success-color);"></i> Work has been approved! Payment released.',
                 sender: 'system',
                 timestamp: Date.now(),
                 files: []
@@ -443,8 +555,68 @@ document.addEventListener('DOMContentLoaded', function() {
             
             sampleMessages[currentConversation.id].push(message);
             loadMessages(currentConversation.id);
-        }
+            
+            // Hide approve button after approval
+            approveWorkBtn.style.display = 'none';
+        });
     });
+    
+    function showSuccessMessage(title, message) {
+        const alert = document.createElement('div');
+        alert.className = 'success-alert fade-in-down';
+        alert.innerHTML = `
+            <i class="fas fa-check-circle"></i>
+            <div>
+                <strong>${title}</strong>
+                <p>${message}</p>
+            </div>
+        `;
+        
+        if (!document.getElementById('success-alert-styles')) {
+            const style = document.createElement('style');
+            style.id = 'success-alert-styles';
+            style.textContent = `
+                .success-alert {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: var(--success-gradient);
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: var(--radius-lg);
+                    box-shadow: var(--shadow-xl);
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    z-index: 10001;
+                    max-width: 400px;
+                }
+                
+                .success-alert i {
+                    font-size: 1.5rem;
+                }
+                
+                .success-alert strong {
+                    display: block;
+                    margin-bottom: 0.25rem;
+                }
+                
+                .success-alert p {
+                    margin: 0;
+                    font-size: var(--font-size-sm);
+                    opacity: 0.9;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        document.body.appendChild(alert);
+        
+        setTimeout(() => {
+            alert.style.animation = 'fadeOut 0.3s ease-out';
+            setTimeout(() => alert.remove(), 300);
+        }, 4000);
+    }
 
     // Helper functions
     function getTimeAgo(timestamp) {

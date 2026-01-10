@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - Skill Exchange</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/landing.css">
+    <style>
+        .help-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+        
+        .help-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .help-hero h1 {
+            font-size: var(--font-size-4xl);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .help-hero p {
+            font-size: var(--font-size-lg);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            font-size: var(--font-size-lg);
+            transition: all var(--transition-fast);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+        }
+        
+        .help-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .help-category-card {
+            background: var(--bg-color);
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+        
+        .help-category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-2xl);
+        }
+        
+        .help-category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .help-category-card h3 {
+            font-size: var(--font-size-xl);
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .help-category-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .faq-section {
+            margin-top: 4rem;
+        }
+        
+        .faq-section h2 {
+            font-size: var(--font-size-3xl);
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .faq-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--bg-color);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: all var(--transition-fast);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            transition: background-color var(--transition-fast);
+        }
+        
+        .faq-question:hover {
+            background-color: var(--bg-secondary);
+        }
+        
+        .faq-icon {
+            color: var(--primary-color);
+            transition: transform var(--transition-fast);
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-base);
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .contact-cta {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 3rem;
+            border-radius: var(--radius-xl);
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .contact-cta h2 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-cta p {
+            font-size: var(--font-size-lg);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .help-hero h1 {
+                font-size: var(--font-size-3xl);
+            }
+            
+            .help-categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo"><i class="fas fa-exchange-alt"></i> Skill Exchange</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="browse-jobs.html" class="nav-link">Browse Jobs</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="help.html" class="nav-link active">Help Center</a>
+                <a href="login.html" class="nav-link btn-outline">Login</a>
+                <a href="register.html" class="nav-link btn-primary">Register</a>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Help Content -->
+    <div class="help-container">
+        <div class="help-hero">
+            <h1>How can we help you?</h1>
+            <p>Search our knowledge base or browse categories below to find answers to your questions.</p>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search for help...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+
+        <!-- Help Categories -->
+        <div class="help-categories">
+            <div class="help-category-card">
+                <div class="help-category-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>Getting Started</h3>
+                <p>Learn the basics of using Skill Exchange and set up your account.</p>
+            </div>
+
+            <div class="help-category-card">
+                <div class="help-category-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Jobs & Projects</h3>
+                <p>Everything about posting jobs, applying, and managing projects.</p>
+            </div>
+
+            <div class="help-category-card">
+                <div class="help-category-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <h3>Coins & Payments</h3>
+                <p>Understanding the coin system, transactions, and withdrawals.</p>
+            </div>
+
+            <div class="help-category-card">
+                <div class="help-category-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>Account & Security</h3>
+                <p>Manage your profile, security settings, and privacy options.</p>
+            </div>
+
+            <div class="help-category-card">
+                <div class="help-category-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3>Communication</h3>
+                <p>How to use messaging, notifications, and stay in touch.</p>
+            </div>
+
+            <div class="help-category-card">
+                <div class="help-category-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <h3>Troubleshooting</h3>
+                <p>Solutions to common issues and technical problems.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I get started on Skill Exchange?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Getting started is easy! Simply register for an account, complete your profile with your skills and experience, and you're ready to browse jobs or post your own. We recommend adding a profile picture and detailed information to build trust with clients and workers.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What are coins and how do they work?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Coins are the virtual currency used on Skill Exchange. Clients use coins to pay for completed work, and workers earn coins for their services. When a job is posted, the coins are locked in escrow. Once the work is approved, the coins are released to the worker's wallet. You can withdraw coins or use them to hire other workers.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I apply for a job?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Browse available jobs in your area of expertise, click on any job to view details, and click the "Apply" button. Write a compelling proposal explaining why you're the best fit for the job. Include relevant experience, estimated completion time, and any questions you have about the project.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I post a job?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Click "Post Job" in the navigation menu, fill in the job details including title, description, category, deadline, and coin payment. Make sure to provide clear requirements and deliverables. The coins will be locked from your wallet until the job is completed and approved.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What happens after I submit my work?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            After submitting your work, the client will review it. If approved, the locked coins are automatically released to your wallet. If revisions are needed, the client will provide feedback. You can communicate through the messaging system to clarify any requirements.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I build my reputation?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Build your reputation by completing jobs on time, delivering quality work, and maintaining good communication with clients. After each completed job, clients can rate your work. Higher ratings and more completed jobs increase your visibility and trustworthiness on the platform.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is my payment secure?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! When a client posts a job, the payment is locked in escrow. This ensures workers that payment is available. The coins are only released when the client approves the work, protecting both parties in the transaction.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I cancel a job?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Clients can cancel jobs before a worker is assigned. Once work has started, cancellation requires mutual agreement. If there's a dispute, you can contact our support team for assistance. Always communicate clearly with the other party before canceling.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="contact-cta">
+            <h2>Still have questions?</h2>
+            <p>Our support team is ready to help you with any issues or concerns.</p>
+            <a href="contact.html" class="btn btn-secondary btn-large">
+                <i class="fas fa-envelope"></i> Contact Support
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4 class="footer-title">About Skill Exchange</h4>
+                    <p class="footer-text">
+                        The trusted marketplace for connecting clients with talented workers. 
+                        Exchange skills and earn coins for quality work delivered.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="browse-jobs.html">Browse Jobs</a></li>
+                        <li><a href="post-job.html">Post a Job</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Contact</h4>
+                    <p class="footer-text">
+                        Email: support@skillexchange.com<br>
+                        Phone: (555) 123-4567
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Skill Exchange. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/mock-auth.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked FAQ if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
