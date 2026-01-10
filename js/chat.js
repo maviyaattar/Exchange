@@ -239,6 +239,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Mark as read
         conv.unread = 0;
         loadConversations();
+
+        // Mobile: Switch to chat panel
+        if (window.innerWidth <= 768) {
+            document.querySelector('.conversations-panel').classList.remove('active');
+            document.querySelector('.chat-panel').classList.add('active');
+        }
     }
 
     // Load messages
@@ -461,6 +467,30 @@ document.addEventListener('DOMContentLoaded', function() {
         if (bytes < 1024) return bytes + ' B';
         if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
         return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    // Mobile: Handle back button click
+    function handleMobileBack() {
+        if (window.innerWidth <= 768) {
+            document.querySelector('.chat-panel').classList.remove('active');
+            document.querySelector('.conversations-panel').classList.add('active');
+        }
+    }
+
+    // Mobile: Add back button listener
+    const chatHeader = document.querySelector('.chat-header');
+    if (chatHeader) {
+        chatHeader.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && e.target === chatHeader) {
+                handleMobileBack();
+            }
+        });
+    }
+
+    // Initialize mobile view
+    if (window.innerWidth <= 768) {
+        document.querySelector('.conversations-panel').classList.add('active');
+        document.querySelector('.chat-panel').classList.remove('active');
     }
 
     // Initialize
