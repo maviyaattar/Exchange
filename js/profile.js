@@ -1,21 +1,54 @@
 // Profile Logic
 document.addEventListener('DOMContentLoaded', function() {
-    const user = getCurrentUser();
+    // Check if viewing another user's profile via URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    
+    let user;
+    if (userId) {
+        // Load other user's profile
+        user = getUserById(userId);
+        if (!user) {
+            // If user not found, redirect to current user's profile
+            window.location.href = 'profile.html';
+            return;
+        }
+        // Hide edit button when viewing others' profiles
+        const editBtn = document.querySelector('button[onclick="editProfile()"]');
+        if (editBtn) {
+            editBtn.style.display = 'none';
+        }
+    } else {
+        // Load current user's profile
+        user = getCurrentUser();
+    }
     
     // Update profile info
     updateProfile(user);
 });
 
+// Helper function to get user by ID from mock data
+function getUserById(userId) {
+    // In a real app, this would fetch from the database
+    const mockUsers = window.MOCK_DATA ? window.MOCK_DATA.users : [];
+    return mockUsers.find(u => u.uid === userId || u.id === userId);
+}
+
 function updateProfile(user) {
     // Basic info
     document.getElementById('profileName').textContent = user.name;
     document.getElementById('profileEmail').textContent = user.email;
-    document.getElementById('profileRole').textContent = user.role === 'worker' ? '💼 Worker' : '📝 Client';
     
-    // Avatar
+    // Role with icon instead of emoji
+    const roleElement = document.getElementById('profileRole');
+    roleElement.innerHTML = user.role === 'worker' 
+        ? '<i class="fas fa-briefcase"></i> Worker' 
+        : '<i class="fas fa-file-alt"></i> Client';
+    
+    // Avatar with icon instead of emoji
     const avatar = document.getElementById('profileAvatar');
     if (avatar) {
-        avatar.textContent = user.avatar || user.name.charAt(0).toUpperCase();
+        avatar.innerHTML = '<i class="fas fa-user"></i>';
     }
     
     // Stats
