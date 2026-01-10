@@ -101,6 +101,7 @@ async function createUserProfile(user, additionalData = {}) {
         uid: user.uid,
         email: user.email,
         name: additionalData.name || user.name || user.email.split('@')[0],
+        username: additionalData.username || user.username || user.email.split('@')[0].toLowerCase(),
         role: additionalData.role || 'worker',
         coins: additionalData.coins !== undefined ? additionalData.coins : user.coins || 100,
         lockedCoins: 0,
@@ -236,11 +237,19 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             const name = document.getElementById('name').value;
+            const username = document.getElementById('username').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             // Default all users to worker role for simplified onboarding
             const role = 'worker';
             const submitBtn = registerForm.querySelector('button[type="submit"]');
+            
+            // Validate username format
+            const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+            if (!usernameRegex.test(username)) {
+                showError('Invalid Username', 'Username must be 3-20 characters and contain only letters, numbers, and underscores.');
+                return;
+            }
             
             // Validate password length
             if (password.length < 6) {
@@ -261,8 +270,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     displayName: name
                 });
                 
-                // Create user profile
-                const userData = await createUserProfile(user, { name, role });
+                // Create user profile with username
+                const userData = await createUserProfile(user, { name, username, role });
                 
                 saveUserData(userData);
                 showSuccess('Welcome to Skill Exchange! Your account has been created successfully.');
@@ -325,6 +334,65 @@ document.addEventListener('DOMContentLoaded', function() {
                 hideLoading(guestBtn);
                 showError('Guest Login Failed', error.message || 'Failed to continue as guest. Please try again.');
             }
+        });
+    }
+    
+    // Google Login Button Handler
+    const googleLoginBtn = document.getElementById('googleLoginBtn');
+    const googleRegisterBtn = document.getElementById('googleRegisterBtn');
+    
+    async function handleGoogleAuth(button) {
+        showLoading(button);
+        
+        try {
+            // Mock Google authentication - in real app, use Firebase Google Auth
+            const mockGoogleUser = {
+                uid: generateUID(),
+                email: 'googleuser@gmail.com',
+                name: 'Google User',
+                username: 'googleuser',
+                role: 'worker',
+                avatar: '👤',
+                coins: 200,
+                lockedCoins: 0,
+                earnedCoins: 0,
+                rating: 0,
+                skills: [],
+                completedJobs: 0,
+                activeJobs: 0,
+                photoURL: 'https://via.placeholder.com/150',
+                isGoogleAuth: true,
+                createdAt: new Date().toISOString()
+            };
+            
+            // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 800));
+            
+            saveUserData(mockGoogleUser);
+            showSuccess('Successfully signed in with Google!');
+            
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1000);
+        } catch (error) {
+            hideLoading(button);
+            showError('Google Sign-In Failed', 'Failed to sign in with Google. Please try again.');
+        }
+    }
+    
+    function generateUID() {
+        return 'user_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+    }
+    
+    if (googleLoginBtn) {
+        googleLoginBtn.addEventListener('click', function() {
+            handleGoogleAuth(googleLoginBtn);
+        });
+    }
+    
+    if (googleRegisterBtn) {
+        googleRegisterBtn.addEventListener('click', function() {
+            handleGoogleAuth(googleRegisterBtn);
         });
     }
 });

@@ -98,6 +98,37 @@
     width: 100%;
 }
 
+/* Google Sign-In Button */
+.btn-google {
+    background-color: #ffffff;
+    color: #757575;
+    border: 1px solid #dadce0;
+    font-weight: var(--font-weight-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    transition: all var(--transition-fast);
+}
+
+.btn-google:hover {
+    background-color: #f8f9fa;
+    border-color: #d2d4d8;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+    transform: translateY(-1px);
+}
+
+.btn-google:active {
+    background-color: #f1f3f4;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3);
+    transform: translateY(0);
+}
+
+.btn-google .fa-google {
+    font-size: 1.1em;
+    color: #4285f4;
+}
+
 .form-options {
     display: flex;
     justify-content: space-between;
