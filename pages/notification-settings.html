@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Settings - WorkCoin</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/settings.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .settings-tabs {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-xl);
+            border-bottom: 2px solid var(--border-color);
+            overflow-x: auto;
+        }
+        
+        .settings-tab {
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--text-secondary);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .settings-tab:hover {
+            color: var(--primary-color);
+            background: var(--bg-secondary);
+        }
+        
+        .settings-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .settings-tabs {
+                gap: 0;
+            }
+            
+            .settings-tab {
+                font-size: var(--font-size-sm);
+                padding: var(--spacing-sm) var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="fas fa-coins"></i> WorkCoin</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="browse-jobs.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-briefcase"></i></span>
+                    <span class="nav-text">Browse Jobs</span>
+                </a>
+                <a href="my-jobs.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
+                    <span class="nav-text">My Jobs</span>
+                </a>
+                <a href="post-job.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-plus-circle"></i></span>
+                    <span class="nav-text">Post Job</span>
+                </a>
+                <a href="wallet.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-wallet"></i></span>
+                    <span class="nav-text">Wallet</span>
+                </a>
+                <a href="notifications.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-bell"></i></span>
+                    <span class="nav-text">Notifications</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-user"></i></span>
+                    <span class="nav-text">Profile</span>
+                </a>
+                <a href="settings.html" class="nav-item active">
+                    <span class="nav-icon"><i class="fas fa-cog"></i></span>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="header-title">
+                    <h1>Settings</h1>
+                </div>
+                <div class="header-actions">
+                    <div class="coin-display">
+                        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+                        <span class="coin-amount" id="headerCoins">0</span>
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-avatar" id="userAvatar"><i class="fas fa-user-circle"></i></div>
+                        <span class="user-name" id="userName">User</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Settings Content -->
+            <div class="content-wrapper">
+                <div class="settings-container">
+                    <!-- Settings Tabs -->
+                    <div class="settings-tabs">
+                        <a href="account-settings.html" class="settings-tab">
+                            <i class="fas fa-user-circle"></i> Account
+                        </a>
+                        <a href="notification-settings.html" class="settings-tab active">
+                            <i class="fas fa-bell"></i> Notifications
+                        </a>
+                        <a href="security-settings.html" class="settings-tab">
+                            <i class="fas fa-lock"></i> Security
+                        </a>
+                        <a href="settings.html" class="settings-tab">
+                            <i class="fas fa-cog"></i> General
+                        </a>
+                    </div>
+                    
+                    <!-- Email Notifications -->
+                    <div class="settings-section">
+                        <h3>📧 Email Notifications</h3>
+                        <div class="settings-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Job Applications</div>
+                                <div class="setting-desc">Notify when someone applies to your jobs</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="jobAppNotif" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Job Approvals</div>
+                                <div class="setting-desc">Notify when your work gets approved</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="approvalNotif" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Payment Updates</div>
+                                <div class="setting-desc">Notify on coin transactions</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="paymentNotif" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Messages</div>
+                                <div class="setting-desc">Notify when you receive new messages</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="messageNotif" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Push Notifications -->
+                    <div class="settings-section">
+                        <h3>🔔 Push Notifications</h3>
+                        <div class="settings-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Enable Push Notifications</div>
+                                <div class="setting-desc">Receive real-time updates on your device</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="pushEnabled">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Desktop Notifications</div>
+                                <div class="setting-desc">Show notifications on desktop</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="desktopNotif">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Marketing -->
+                    <div class="settings-section">
+                        <h3>📣 Marketing & Updates</h3>
+                        <div class="settings-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Newsletter</div>
+                                <div class="setting-desc">Receive weekly newsletter with platform updates</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="newsletter">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Feature Announcements</div>
+                                <div class="setting-desc">Get notified about new features and improvements</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="featureNotif">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Promotional Offers</div>
+                                <div class="setting-desc">Receive special offers and promotions</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="promoNotif">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification Frequency -->
+                    <div class="settings-section">
+                        <h3>⏰ Notification Frequency</h3>
+                        <div class="settings-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Email Digest</div>
+                                <div class="setting-desc">How often to receive email summaries</div>
+                            </div>
+                            <select class="form-select" id="digestFrequency">
+                                <option value="instant">Instant</option>
+                                <option value="daily" selected>Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="never">Never</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Save Button -->
+                    <div style="margin-top: var(--spacing-xl); display: flex; gap: var(--spacing-md);">
+                        <button class="btn btn-primary btn-large" onclick="saveSettings()">
+                            💾 Save Changes
+                        </button>
+                        <button class="btn btn-outline btn-large" onclick="window.location.reload()">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Navigation (Mobile) -->
+        <nav class="bottom-nav">
+            <a href="dashboard.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">📊</span>
+                <span class="bottom-nav-text">Dashboard</span>
+            </a>
+            <a href="browse-jobs.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">💼</span>
+                <span class="bottom-nav-text">Jobs</span>
+            </a>
+            <a href="post-job.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">➕</span>
+                <span class="bottom-nav-text">Post</span>
+            </a>
+            <a href="wallet.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">💰</span>
+                <span class="bottom-nav-text">Wallet</span>
+            </a>
+            <a href="profile.html" class="bottom-nav-item">
+                <span class="bottom-nav-icon">👤</span>
+                <span class="bottom-nav-text">Profile</span>
+            </a>
+        </nav>
+    </div>
+    
+    <script src="../js/data.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script>
+        function saveSettings() {
+            alert('Notification settings saved successfully!');
+        }
+    </script>
+</body>
+</html>

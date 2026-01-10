@@ -17,36 +17,36 @@
                 <div class="logo"><i class="fas fa-coins"></i> WorkCoin</div>
             </div>
             <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+                <a href="dashboard.html" class="nav-item" aria-label="Dashboard">
+                    <span class="nav-icon" aria-hidden="true"><i class="fas fa-chart-line"></i></span>
                     <span class="nav-text">Dashboard</span>
                 </a>
-                <a href="browse-jobs.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-briefcase"></i></span>
+                <a href="browse-jobs.html" class="nav-item" aria-label="Browse Jobs">
+                    <span class="nav-icon" aria-hidden="true"><i class="fas fa-briefcase"></i></span>
                     <span class="nav-text">Browse Jobs</span>
                 </a>
-                <a href="my-jobs.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
+                <a href="my-jobs.html" class="nav-item" aria-label="My Jobs">
+                    <span class="nav-icon" aria-hidden="true"><i class="fas fa-clipboard-list"></i></span>
                     <span class="nav-text">My Jobs</span>
                 </a>
-                <a href="post-job.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-plus-circle"></i></span>
+                <a href="post-job.html" class="nav-item" aria-label="Post Job">
+                    <span class="nav-icon" aria-hidden="true"><i class="fas fa-plus-circle"></i></span>
                     <span class="nav-text">Post Job</span>
                 </a>
-                <a href="wallet.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-wallet"></i></span>
+                <a href="wallet.html" class="nav-item" aria-label="Wallet">
+                    <span class="nav-icon" aria-hidden="true"><i class="fas fa-wallet"></i></span>
                     <span class="nav-text">Wallet</span>
                 </a>
-                <a href="notifications.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-bell"></i></span>
+                <a href="notifications.html" class="nav-item" aria-label="Notifications">
+                    <span class="nav-icon" aria-hidden="true"><i class="fas fa-bell"></i></span>
                     <span class="nav-text">Notifications</span>
                 </a>
-                <a href="profile.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-user"></i></span>
+                <a href="profile.html" class="nav-item" aria-label="Profile">
+                    <span class="nav-icon" aria-hidden="true"><i class="fas fa-user"></i></span>
                     <span class="nav-text">Profile</span>
                 </a>
-                <a href="settings.html" class="nav-item active">
-                    <span class="nav-icon"><i class="fas fa-cog"></i></span>
+                <a href="settings.html" class="nav-item active" aria-label="Settings" aria-current="page">
+                    <span class="nav-icon" aria-hidden="true"><i class="fas fa-cog"></i></span>
                     <span class="nav-text">Settings</span>
                 </a>
             </nav>
@@ -55,8 +55,8 @@
         <!-- Main Content -->
         <div class="main-content">
             <!-- Top Header -->
-            <header class="top-header">
-                <button class="menu-toggle" id="menuToggle">
+            <header class="top-header" role="banner">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -65,12 +65,12 @@
                     <h1>Settings</h1>
                 </div>
                 <div class="header-actions">
-                    <div class="coin-display">
-                        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+                    <div class="coin-display" aria-label="Coin balance">
+                        <span class="coin-icon" aria-hidden="true"><i class="fas fa-coins"></i></span>
                         <span class="coin-amount" id="headerCoins">0</span>
                     </div>
                     <div class="user-menu">
-                        <div class="user-avatar" id="userAvatar"><i class="fas fa-user-circle"></i></div>
+                        <div class="user-avatar" id="userAvatar" aria-hidden="true"><i class="fas fa-user-circle"></i></div>
                         <span class="user-name" id="userName">User</span>
                     </div>
                 </div>
@@ -78,23 +78,23 @@
             
             <!-- Settings Content -->
             <div class="content-wrapper">
-                <div class="settings-container">
+                <div class="settings-container" role="main" aria-label="Settings">
                     <!-- Account Settings -->
                     <div class="settings-section">
                         <h3>👤 Account Settings</h3>
                         <div class="settings-item">
                             <div class="setting-info">
-                                <div class="setting-label">Email Address</div>
-                                <div class="setting-desc" id="userEmail">user@example.com</div>
+                                <div class="setting-label" id="email-label">Email Address</div>
+                                <div class="setting-desc" id="userEmail" aria-labelledby="email-label">user@example.com</div>
                             </div>
-                            <button class="btn btn-outline btn-small" onclick="changeEmail()">Change</button>
+                            <button class="btn btn-outline btn-small" onclick="changeEmail()" aria-label="Change email address">Change</button>
                         </div>
                         <div class="settings-item">
                             <div class="setting-info">
-                                <div class="setting-label">Password</div>
-                                <div class="setting-desc">••••••••</div>
+                                <div class="setting-label" id="password-label">Password</div>
+                                <div class="setting-desc" aria-labelledby="password-label">••••••••</div>
                             </div>
-                            <button class="btn btn-outline btn-small" onclick="changePassword()">Change</button>
+                            <button class="btn btn-outline btn-small" onclick="changePassword()" aria-label="Change password">Change</button>
                         </div>
                     </div>
                     

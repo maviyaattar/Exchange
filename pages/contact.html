@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - WorkCoin</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .contact-section {
+            padding: var(--spacing-3xl) 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-3xl);
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .contact-info {
+            color: white;
+        }
+        
+        .contact-info h1 {
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--spacing-lg);
+            animation: slideInLeft 0.6s ease-out;
+        }
+        
+        .contact-info p {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-2xl);
+            opacity: 0.9;
+            animation: slideInLeft 0.7s ease-out;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xl);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-lg);
+            background: rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-fast);
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        .contact-method:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(10px);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        
+        .contact-method-details h3 {
+            margin-bottom: var(--spacing-xs);
+            color: white;
+        }
+        
+        .contact-method-details p, 
+        .contact-method-details a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        .contact-method-details a:hover {
+            color: white;
+        }
+        
+        .contact-form-wrapper {
+            background: white;
+            padding: var(--spacing-3xl);
+            border-radius: var(--radius-xl);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideInRight 0.6s ease-out;
+        }
+        
+        .contact-form-wrapper h2 {
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .contact-form-wrapper .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+        
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border-left: 4px solid var(--success-color);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-lg);
+            color: var(--success-color);
+            animation: fadeInDown 0.5s ease-out;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            transition: all var(--transition-fast);
+            backdrop-filter: blur(10px);
+        }
+        
+        .social-link:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+            }
+            
+            .contact-info h1 {
+                font-size: var(--font-size-3xl);
+            }
+            
+            .contact-form-wrapper {
+                padding: var(--spacing-xl);
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo"><i class="fas fa-coins"></i> WorkCoin</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="browse-jobs.html" class="nav-link">Browse Jobs</a>
+                <a href="login.html" class="nav-link btn-outline">Login</a>
+                <a href="register.html" class="nav-link btn-primary">Register</a>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-container">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h1><i class="fas fa-comments"></i> Get in Touch</h1>
+                    <p>
+                        Have questions or feedback? We'd love to hear from you. Our team is here to help 
+                        you with any inquiries about WorkCoin.
+                    </p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-method-details">
+                                <h3>Email Us</h3>
+                                <p><a href="mailto:support@workcoin.com">support@workcoin.com</a></p>
+                                <p style="font-size: var(--font-size-sm); opacity: 0.8;">
+                                    We'll respond within 24 hours
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-method-details">
+                                <h3>Call Us</h3>
+                                <p><a href="tel:+15551234567">(555) 123-4567</a></p>
+                                <p style="font-size: var(--font-size-sm); opacity: 0.8;">
+                                    Mon-Fri, 9AM-6PM EST
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-method-details">
+                                <h3>Visit Us</h3>
+                                <p>123 WorkCoin Street<br>Tech City, TC 12345<br>United States</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-method-details">
+                                <h3>Business Hours</h3>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM<br>
+                                   Saturday: 10:00 AM - 4:00 PM<br>
+                                   Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper">
+                    <h2>Send Us a Message</h2>
+                    <p class="subtitle">Fill out the form below and we'll get back to you as soon as possible.</p>
+                    
+                    <div id="successMessage" class="success-message">
+                        <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. 
+                        We'll get back to you soon.
+                    </div>
+                    
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name *</label>
+                                <input type="text" class="form-input" id="firstName" required 
+                                       placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name *</label>
+                                <input type="text" class="form-input" id="lastName" required 
+                                       placeholder="Doe">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" class="form-input" id="email" required 
+                                   placeholder="john.doe@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" id="phone" 
+                                   placeholder="(555) 123-4567">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Subject *</label>
+                            <select class="form-select" id="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Message *</label>
+                            <textarea class="form-textarea" id="message" required 
+                                      placeholder="Tell us more about your inquiry..." 
+                                      rows="5"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block btn-large">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4 class="footer-title">About WorkCoin</h4>
+                    <p class="footer-text">
+                        The trusted marketplace for connecting clients with talented workers.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="browse-jobs.html">Browse Jobs</a></li>
+                        <li><a href="post-job.html">Post a Job</a></li>
+                        <li><a href="register.html">Sign Up</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Contact</h4>
+                    <p class="footer-text">
+                        Email: support@workcoin.com<br>
+                        Phone: (555) 123-4567
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 WorkCoin. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/navigation.js"></script>
+    <script>
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+            
+            // Reset form
+            this.reset();
+            
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
