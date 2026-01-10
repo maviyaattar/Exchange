@@ -239,6 +239,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Mark as read
         conv.unread = 0;
         loadConversations();
+
+        // Mobile: Show chat panel and hide conversations
+        if (window.innerWidth <= 768) {
+            document.querySelector('.conversations-panel').classList.remove('active');
+            document.getElementById('chatPanel').classList.add('active');
+        }
     }
 
     // Load messages
@@ -446,6 +452,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Mobile back button handler
+    const chatHeader = document.getElementById('chatHeader');
+    if (chatHeader && window.innerWidth <= 768) {
+        chatHeader.addEventListener('click', (e) => {
+            // Check if clicked on the pseudo-element area (left side)
+            const rect = chatHeader.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            
+            if (clickX < 60) { // Approximate back button area
+                // Show conversations panel, hide chat panel
+                document.querySelector('.conversations-panel').classList.add('active');
+                document.getElementById('chatPanel').classList.remove('active');
+            }
+        });
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            // Desktop view - show both panels
+            document.querySelector('.conversations-panel').classList.remove('active');
+            document.getElementById('chatPanel').classList.remove('active');
+        } else {
+            // Mobile view - show conversations by default
+            if (!currentConversation) {
+                document.querySelector('.conversations-panel').classList.add('active');
+                document.getElementById('chatPanel').classList.remove('active');
+            }
+        }
+    });
+
     // Helper functions
     function getTimeAgo(timestamp) {
         const seconds = Math.floor((Date.now() - timestamp) / 1000);
@@ -465,4 +502,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize
     loadConversations();
+
+    // Initialize mobile view
+    if (window.innerWidth <= 768) {
+        document.querySelector('.conversations-panel').classList.add('active');
+        document.getElementById('chatPanel').classList.remove('active');
+    }
 });
