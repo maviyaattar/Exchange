@@ -71,7 +71,11 @@ async function handleGoogleSignIn(isSignUp = false) {
     }
 }
 
-// Login Form Handler
+// ============================================
+// Form Event Handlers
+// ============================================
+
+// Initialize event handlers when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
@@ -79,6 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const googleSignInBtn = document.getElementById('googleSignInBtn');
     const googleSignUpBtn = document.getElementById('googleSignUpBtn');
     
+    // ============================================
+    // Login Form Handler
+    // ============================================
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -108,6 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // ============================================
+    // Registration Form Handler
+    // ============================================
     if (registerForm) {
         registerForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -140,6 +150,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // ============================================
+    // Guest Login Handler
+    // ============================================
     if (guestBtn) {
         guestBtn.addEventListener('click', function() {
             // Create guest user
@@ -161,6 +174,10 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'dashboard.html';
         });
     }
+    
+    // ============================================
+    // Google Authentication Buttons
+    // ============================================
     
     // Google Sign-In button (Login page)
     if (googleSignInBtn) {
